@@ -1,0 +1,396 @@
+<template>
+  <header class="hdr">
+    <div class="bnr">
+      <div class="bnr-bg-1"></div>
+
+      <div class="bnr-bg-3"></div>
+      <div class="bnr-mist"></div>
+      <div class="bnr-red-overlay"></div>
+      <div class="container bnr-inner">
+        <img
+          class="bnr-logo"
+          src="/images/school-emblem.webp"
+          alt="山东旅游职业学院"
+        />
+        <div class="bnr-txt">
+          <h1>国家级教学成果奖申报</h1>
+          <h2>
+            红旅铸魂·数智赋能：旅游类专业"红智双融·螺旋递进"育人模式创新与实践
+          </h2>
+        </div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <div class="container nav-inner">
+        <button class="nav-btn" :class="{ on: navOn }" @click="navOn = !navOn">
+          <span /><span /><span />
+        </button>
+        <div class="nav-ls" :class="{ on: navOn }">
+          <div v-for="m in menus" :key="m.k" class="nav-it-wrap">
+            <router-link
+              :to="m.q ? { path: m.p, query: m.q } : m.p"
+              class="nav-it"
+              :class="{ act: isActive(m) }"
+              @click="navOn = false"
+              >{{ m.l }}</router-link
+            >
+            <div v-if="m.children && m.children.length" class="nav-sub">
+              <router-link
+                v-for="c in m.children"
+                :key="c.k"
+                :to="c.q ? { path: c.p, query: c.q } : c.p"
+                class="nav-sub-it"
+                :class="{ act: isSubActive(c.p, c.q) }"
+                @click="navOn = false"
+                >{{ c.l }}</router-link
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+</template>
+
+<script setup>
+import { ref, watch } from "vue";
+import { useRoute } from "vue-router";
+import { topNavItems } from "@/data/content.js";
+
+const route = useRoute();
+const navOn = ref(false);
+
+watch(navOn, (on) => {
+  document.body.style.overflow = on ? "hidden" : "";
+});
+const hasIndex = new Set(['summary', 'effect', 'media', 'international', 'evidence'])
+
+const menus = topNavItems.map((m) => {
+  const children = m.children?.map((c) => {
+    const [path, qs] = c.path.split('?')
+    const query = qs ? Object.fromEntries(new URLSearchParams(qs)) : undefined
+    return { k: c.key, l: c.label, p: path, q: query }
+  })
+  const jumpToChild = children?.length && !hasIndex.has(m.key)
+  return {
+    k: m.key,
+    l: m.label,
+    p: jumpToChild ? children[0].p : m.path,
+    q: jumpToChild ? children[0].q : undefined,
+    children,
+  }
+});
+
+const isActive = (m) => {
+  if (route.path === m.p) return true;
+  if (m.children) return m.children.some((c) => route.path === c.p);
+  return false;
+};
+
+const isSubActive = (p, q) => {
+  if (route.path !== p) return false
+  if (!q) return true
+  return Object.entries(q).every(([k, v]) => route.query[k] === v)
+}
+</script>
+
+<style lang="scss" scoped>
+.bnr {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+}
+.bnr-bg-1 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 90%;
+  background: url("/images/banner-blend-left.webp") center/cover;
+  -webkit-mask-image: linear-gradient(to right, #000 55%, transparent 100%);
+  mask-image: linear-gradient(to right, #000 55%, transparent 100%);
+}
+.bnr-bg-3 {
+  position: absolute;
+  right: -20%;
+  top: 0;
+  bottom: 0;
+  width: 45%;
+  background: url("/images/banner-blend-right.webp") left center/cover;
+  -webkit-mask-image: linear-gradient(to left, #000 40%, transparent 100%);
+  mask-image: linear-gradient(to left, #000 40%, transparent 100%);
+}
+.bnr-mist {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.08) 40%,
+    transparent 70%
+  );
+}
+.bnr-red-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.35) 50%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+}
+.bnr-inner {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 32px;
+  padding-left: 40px;
+}
+.bnr-logo {
+  width: 85px;
+  height: 85px;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.35));
+}
+.bnr-txt {
+  flex: 1;
+  color: #fff;
+  h1 {
+    font-size: 44px;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 6px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    font-family: var(--font-serif);
+    color: #fff;
+  }
+  h2 {
+    font-size: 20px;
+    color: #ffe0b2;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 2px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    font-family: "Ma Shan Zheng", "STKaiti", "KaiTi", "楷体", serif;
+  }
+}
+
+.nav {
+  background: var(--red);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-btn {
+  display: none;
+  background: none;
+  border: 0;
+  padding: 14px 16px;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 4px;
+  span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #fff;
+    transition: 0.2s;
+  }
+  &.on span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  &.on span:nth-child(2) {
+    opacity: 0;
+  }
+  &.on span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+}
+.nav-ls {
+  display: flex;
+  width: 100%;
+}
+.nav-it-wrap {
+  flex: 1;
+  position: relative;
+  &:hover .nav-sub {
+    max-height: 600px;
+    visibility: visible;
+    opacity: 1;
+  }
+}
+.nav-it {
+  display: block;
+  height: 48px;
+  line-height: 48px;
+  color: #fff;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background 0.2s;
+  font-family: var(--font-sans);
+  &:hover {
+    background: rgba(0, 0, 0, 0.12);
+    color: #fff;
+    text-decoration: none;
+  }
+  &.act {
+    background: var(--yellow);
+    color: var(--red-d);
+    font-weight: 600;
+  }
+}
+.nav-sub {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 100%;
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+  max-height: 0;
+  visibility: hidden;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.4s ease,
+    opacity 0.25s ease,
+    visibility 0.4s;
+  z-index: 200;
+  border-radius: 0 0 4px 4px;
+}
+.nav-sub-it {
+  display: block;
+  padding: 0 16px;
+  height: 42px;
+  line-height: 42px;
+  font-size: 14px;
+  color: var(--txt);
+  font-family: var(--font-sans);
+  text-align: left;
+  white-space: nowrap;
+  transition: all 0.18s;
+  border-bottom: 1px solid #f0f0f0;
+  &:last-child {
+    border-bottom: none;
+  }
+  &:hover,
+  &.act {
+    background: var(--yellow);
+    color: var(--red-d);
+    text-decoration: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .bnr-txt h1 {
+    font-size: 26px;
+  }
+  .bnr-txt h2 {
+    font-size: 15px;
+  }
+
+  .nav-btn {
+    display: flex;
+  }
+  .nav-ls {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--red);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    &.on {
+      display: flex;
+      max-height: calc(100vh - 56px);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+  .nav-it-wrap {
+    flex: none;
+    border-right: 0 !important;
+    border-left: 0 !important;
+    border-bottom: 1px solid var(--red-d);
+  }
+  .nav-it {
+    flex: none;
+    height: 42px;
+    line-height: 42px;
+    text-align: left;
+    padding: 0 20px;
+    font-size: 14px;
+  }
+  .nav-sub {
+    position: static;
+    max-height: none;
+    visibility: visible;
+    opacity: 1;
+    box-shadow: none;
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.12);
+  }
+  .nav-sub-it {
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-left: 36px;
+    font-size: 13px;
+    &:hover {
+      background: var(--yellow);
+      color: var(--red-d);
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .bnr {
+    height: auto;
+    padding: 20px 14px;
+    text-align: center;
+  }
+  .bnr-inner {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+  .bnr-logo {
+    width: 56px;
+    height: 56px;
+  }
+  .bnr-txt h1 {
+    font-size: 17px;
+    letter-spacing: 1px;
+  }
+  .bnr-txt h2 {
+    font-size: 13px;
+  }
+}
+@media (max-width: 480px) {
+  .bnr {
+    padding: 16px 10px;
+  }
+  .bnr-logo {
+    width: 44px;
+    height: 44px;
+  }
+  .bnr-inner {
+    padding-left: 0;
+  }
+  .bnr-txt h1 {
+    font-size: 15px;
+    letter-spacing: 0;
+  }
+  .bnr-txt h2 {
+    font-size: 11px;
+    letter-spacing: 0;
+  }
+}
+</style>
