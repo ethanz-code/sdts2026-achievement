@@ -7,9 +7,11 @@
         class="ic-slide"
         @click="open(img)"
       >
-        <img v-if="img.src" :src="img.src" class="ic-img" :alt="img.label" />
-        <div v-else class="ic-placeholder">
-          <span class="ic-label">{{ img.label || `[Image ${img.id}]` }}</span>
+        <div class="ic-box">
+          <img v-if="img.src" v-lazy="img.src" class="ic-img" :alt="img.label" />
+          <div class="ic-ph">
+            <span class="ic-ph-label">{{ img.label || `[Image ${img.id}]` }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -110,28 +112,51 @@ function close() {
   }
 }
 
+.ic-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
 .ic-img {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+
+  &.lazy-pending {
+    opacity: 0;
+  }
+  &.lazy-loading {
+    opacity: 0;
+  }
+  &.lazy-loaded {
+    animation: fadeInImg 0.4s ease;
+  }
 }
 
-.ic-placeholder {
-  width: 100%;
-  height: 100%;
+.ic-ph {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
   background: linear-gradient(135deg, #f8f8f8 0%, #e8e8e8 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px dashed #ccc;
   border-radius: 6px;
 }
 
-.ic-label {
+.ic-ph-label {
   font-size: 16px;
   color: #aaa;
   font-family: var(--font-sans);
+}
+
+@keyframes fadeInImg {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 /* Lightbox */

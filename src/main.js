@@ -5,8 +5,10 @@ import './styles/main.scss'
 import App from './App.vue'
 import router from './router'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
+import lazy from './directives/lazy.js'
 
 const app = createApp(App)
+app.directive('lazy', lazy)
 app.use(ElementPlus, { locale: zhCn })
 app.use(router)
 app.mount('#app')
