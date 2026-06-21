@@ -5,6 +5,8 @@
     <PdfViewer v-else-if="kind === 'pdf'" :src="url" />
     <VueOfficeDocx v-else-if="kind === 'docx'" :src="url" />
 
+    <div v-else-if="kind === 'md'" class="cl-md" v-html="html"></div>
+
     <div v-else-if="kind === 'txt'" class="cl-txt">
       <pre>{{ text }}</pre>
     </div>
@@ -17,7 +19,7 @@
       <p class="cl-empty-solution">
         将文件放入 <code>public/docs/{{ dirName }}/</code> 目录即可自动加载
       </p>
-      <p class="cl-empty-formats">支持格式：pdf、docx、txt</p>
+      <p class="cl-empty-formats">支持格式：pdf、docx、md、txt</p>
     </div>
   </div>
 </template>
@@ -25,6 +27,7 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import { marked } from 'marked'
 import PdfViewer from '@/components/PdfViewer.vue'
 import VueOfficeDocx from '@vue-office/docx'
 import '@vue-office/docx/lib/index.css'
@@ -50,23 +53,31 @@ const basePath = computed(() => `/docs/${dirName.value}/${subName.value}`)
 const kind = ref('')
 const url = ref('')
 const text = ref('')
+const html = ref('')
 const loading = ref(true)
 
-function isSpaHtml(r) {
-  const ct = r.headers.get('content-type') || ''
-  return ct.includes('text/html')
+let loadId = 0
+
+function bust() {
+  return `_t=${Date.now()}${Math.random().toString(36).slice(2, 6)}`
 }
 
 async function tryFile(path, ext) {
   try {
-    let r = await fetch(path, { method: 'HEAD' })
-    if (!r.ok || isSpaHtml(r)) {
-      r = await fetch(path, { method: 'GET', headers: { Range: 'bytes=0-0' } })
+    const cacheBust = bust()
+    let r = await fetch(`${path}?${cacheBust}`, { method: 'HEAD' })
+    if (!r.ok || r.headers.get('content-type')?.includes('text/html')) {
+      r = await fetch(`${path}?${cacheBust}`, { method: 'GET', headers: { Range: 'bytes=0-0' } })
     }
-    if (r.ok && !isSpaHtml(r)) {
-      if (ext === 'txt') {
-        const tr = await fetch(path)
-        text.value = await tr.text()
+    if (r.ok && !r.headers.get('content-type')?.includes('text/html')) {
+      if (ext === 'md' || ext === 'txt') {
+        const tr = await fetch(`${path}?${bust()}`)
+        const raw = await tr.text()
+        if (ext === 'md') {
+          html.value = marked.parse(raw)
+        } else {
+          text.value = raw
+        }
       }
       return true
     }
@@ -75,14 +86,17 @@ async function tryFile(path, ext) {
 }
 
 async function load() {
+  const id = ++loadId
   loading.value = true
   kind.value = ''
   url.value = ''
   text.value = ''
+  html.value = ''
 
-  for (const ext of ['pdf', 'docx', 'txt']) {
+  for (const ext of ['pdf', 'docx', 'md', 'txt']) {
     const u = `${basePath.value}.${ext}`
     if (await tryFile(u, ext)) {
+      if (id !== loadId) return
       kind.value = ext
       url.value = u
       loading.value = false
@@ -90,6 +104,7 @@ async function load() {
     }
   }
 
+  if (id !== loadId) return
   loading.value = false
   kind.value = 'none'
 }
@@ -104,10 +119,50 @@ watch([dirName, subName], load)
   display: flex; align-items: center; justify-content: center; min-height: 500px;
   font-size: 15px; color: var(--txt2); font-family: "Noto Sans SC", sans-serif;
 }
+.cl-md {
+  padding: 28px 32px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 2px;
+  min-height: 500px;
+  font-size: 17px;
+  line-height: 2;
+  color: var(--txt);
+  font-family: var(--font-serif);
+}
+.cl-md :deep(h2) {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--red-d);
+  margin: 28px 0 14px;
+  font-family: var(--font-serif);
+}
+.cl-md :deep(h3) {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--red-d);
+  margin: 22px 0 12px;
+  font-family: var(--font-serif);
+}
+.cl-md :deep(p) {
+  margin-bottom: 14px;
+  text-indent: 2em;
+}
+.cl-md :deep(strong) {
+  color: var(--red-d);
+  font-weight: 600;
+}
+.cl-md :deep(ul), .cl-md :deep(ol) {
+  margin: 10px 0 14px 2em;
+}
+.cl-md :deep(li) {
+  margin-bottom: 6px;
+  line-height: 2;
+}
 .cl-txt pre {
   white-space: pre-wrap; word-break: break-word;
-  font-size: 16px; line-height: 2; color: var(--txt);
-  font-family: "Noto Serif SC", serif; padding: 24px;
+  font-size: 17px; line-height: 2; color: var(--txt);
+  font-family: var(--font-serif); padding: 28px 32px;
   background: #fff; border: 1px solid #eee; border-radius: 2px;
   min-height: 500px;
 }

@@ -52,7 +52,6 @@ export const overview = {
 export const leftSidebarItems = [
   { key: 'baize', label: '旅游职业教育大模型-白泽' },
   { key: 'redBrand', label: '红色山东 行走课堂品牌活动' },
-  { key: 'teaching', label: '教学模式改革' },
   { key: 'problem', label: '成果解决的教学问题与方法' },
   { key: 'innovation', label: '成果创新点' },
   { key: 'people', label: '成果完成人' },
