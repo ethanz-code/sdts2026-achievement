@@ -1,6 +1,6 @@
 <template>
    <SecondaryLayout st="推广应用" :si="si" v-model="key" pt="推广应用" :cr="curLabel">
-    <ContentLoader base="promotion">
+    <ContentLoader base="promotion" :sub="effectiveTab">
       <template #fallback>
         <h2 class="sec-h">成果推广应用单位</h2>
         <div class="list">
@@ -26,6 +26,11 @@ const si = [
   {key:'all',label:'全部单位',path:'/promotion?tab=all'}
 ]
 const key = ref(route.query.tab || '')
+const effectiveTab = computed(() => {
+  const t = route.query.tab
+  if (t && /^u\d+$/.test(t)) return 'all'
+  return t || 'all'
+})
 const curLabel = computed(() => si.find(s => s.key === key.value)?.label || '')
 watch(() => route.query.tab, (v) => { key.value = v || '' })
 </script>

@@ -32,15 +32,22 @@ import PdfViewer from '@/components/PdfViewer.vue'
 import VueOfficeDocx from '@vue-office/docx'
 import '@vue-office/docx/lib/index.css'
 
+const props = defineProps({
+  base: String,
+  sub: String
+})
+
 const route = useRoute()
 
 const dirName = computed(() => {
+  if (props.base) return props.base
   let name = (route.name?.toString() || 'home')
   name = name.replace(/-tab$/, '')
   return name
 })
 
 const subName = computed(() => {
+  if (props.sub) return props.sub
   if (route.params.tab) return route.params.tab
   if (route.query.section) return route.query.section
   if (route.query.tab) return route.query.tab
