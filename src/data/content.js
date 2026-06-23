@@ -17,34 +17,44 @@ export const topNavItems = [
     { key: 'awards', label: '曾获奖励情况', path: '/summary?section=awards' }
   ]},
   { key: 'effect', label: '培养成效', path: '/effect', children: [
-    { key: 'overview', label: '总体情况', path: '/effect?tab=overview' },
-    { key: 'awards', label: '学生竞赛获奖', path: '/effect?tab=awards' },
-    { key: 'employment', label: '就业与反馈', path: '/effect?tab=employment' }
+    { key: 'teacherCompetition', label: '教师竞赛', path: '/effect?tab=teacherCompetition' },
+    { key: 'studentCompetition', label: '学生技能竞赛', path: '/effect?tab=studentCompetition' }
   ]},
   { key: 'promotion', label: '推广应用', path: '/promotion', children: [
-    { key: 'all', label: '全部单位', path: '/promotion?tab=all' },
-    { key: 'u0', label: '青岛旅游学校', path: '/promotion?tab=u0' },
-    { key: 'u1', label: '青岛酒店管理职院', path: '/promotion?tab=u1' },
-    { key: 'u2', label: '嘉兴职业技术学院', path: '/promotion?tab=u2' },
-    { key: 'u3', label: '烟台临港工业学校', path: '/promotion?tab=u3' },
-    { key: 'u4', label: '天目湖旅游股份', path: '/promotion?tab=u4' },
-    { key: 'u5', label: '郑州旅游职业学院', path: '/promotion?tab=u5' },
-    { key: 'u6', label: '桂林唐朝国旅', path: '/promotion?tab=u6' }
+    { key: 'schoolApp', label: '院校应用', path: '/promotion?tab=schoolApp' },
+    { key: 'companyApp', label: '部分合作企业应用推广情况', path: '/promotion?tab=companyApp' },
+    { key: 'otherApp', label: '其他应用单位', path: '/promotion?tab=otherApp' }
   ]},
   { key: 'media', label: '媒体报道', path: '/media' },
   { key: 'international', label: '国际认可', path: '/international' },
-  { key: 'evidence', label: '其他佐证', path: '/evidence' }
+  { key: 'evidence', label: '其他佐证', path: '/evidence', children: [
+    { key: 'case1', label: '案例1：行走课堂·数智铸魂', path: '/evidence?filter=case1' },
+    { key: 'case2', label: '案例2：校企协三方联动', path: '/evidence?filter=case2' },
+    { key: 'case3', label: '案例3：标准引领·产教适配', path: '/evidence?filter=case3' },
+    { key: 'case4', label: '案例4：双元三融·数智赋能', path: '/evidence?filter=case4' },
+    { key: 'case5', label: '案例5：活页模块·数智融合', path: '/evidence?filter=case5' },
+    { key: 'case6', label: '案例6：行业深耕·教学反哺', path: '/evidence?filter=case6' },
+    { key: 'case7', label: '案例7：基地共建·实战育人', path: '/evidence?filter=case7' },
+    { key: 'case8', label: '案例8：白泽赋能·生态重构', path: '/evidence?filter=case8' },
+    { key: 'case9', label: '案例9：留学山旅·中蒙共育', path: '/evidence?filter=case9' },
+    { key: 'cooperation', label: '创新校企合作机制', path: '/evidence?filter=cooperation' },
+    { key: 'base', label: '建设产教融合实训基地', path: '/evidence?filter=base' },
+    { key: 'museum', label: '新增博物馆研学导师', path: '/evidence?filter=museum' },
+    { key: 'textbook', label: '新增教材', path: '/evidence?filter=textbook' },
+    { key: 'project', label: '新增横向课题', path: '/evidence?filter=project' },
+    { key: 'mentor', label: '特聘产业导师', path: '/evidence?filter=mentor' },
+    { key: 'award2025', label: '新增2025年度优秀理事单位匾额', path: '/evidence?filter=award2025' }
+  ]}
 ]
 
 // ========== 成果简介（来自申报书 一、成果简介） ==========
 export const overview = {
   title: '成果简介',
   paragraphs: [
-    '山东省精品旅游产业被列为"十强产业"，产业数字化转型加速推进。《职业院校人工智能应用指引》明确要求推进人工智能与职业教育教学深度融合。高职旅游类高技能人才培养面临"政治素质过硬、专业能力扎实、数字素养适配"的时代新要求。',
-    '然而，长期实践存在三重困境：红色文化育人"悬浮"，思政教育与专业教学"两张皮"，人工智能应用滞后形成"技术代差"，制约"德技并修"高素质旅游人才培养。',
-    '自2018年启动"红色山东·行走课堂"活动，历经8年探索，形成了"红旅铸魂·数智赋能"双轮驱动的旅游类高技能人才培养模式。成果综合运用情境学习与具身认知理论，确立了红色文化与数智技术协同推进的育人理念。',
-    '课程体系上，构建了"一核双线·三阶四融"的课程结构，以红色文化为价值统领、数智技术为驱动，依托"白泽"大模型，形成"基础通识—专业核心—拓展创新"三阶递进、思政与专业等四维融通的课程新形态。搭建了"四阶·双环"实景融通实践体系，遵循"认知—模拟—实景—创新"四阶递进，"白泽"大模型构建虚拟仿真内环，以红色基地和企业为真实场景外环的双环联动；通过四堂协同，打造全域实践育人空间。构建了"三维赋能、三段递升、产创融合"素养提升体系，聚焦思想、专业、数字三维素养协同发展，遵循"价值筑基→能力跃升→使命担当"三段递升路径，依托"阅途工坊"将真实项目转化为创新创业实践。创建了"红智双融·螺旋递进"旅游类人才培养模式，以红色文化为价值内核、数智技术为引擎，形成"红色场景与人工智能"的深度融合；遵循"价值塑造与能力培养交互生成、螺旋上升"的育人逻辑，使学生实现从"技能习得者"到"价值传播者"的跃迁。平台体系上，构建了"三台联动·立体支撑"的架构，资源供给台以"白泽"大模型为中枢，场景承载台依托校内外实训基地，形成梯度化实践场景链；生态赋能台汇聚5个省级以上行业平台，实现资源、场景、生态三位一体良性循环。构建了"四维驱动·闭环运行"教学保障机制，以价值导航、技术护航、制度保障、评价反馈为维度，形成"目标—实施—评价—改进"动态迭代闭环。',
-    '成果实施以来，学生就业对口率达到95.3%，省级以上技能大赛获奖22项；旅游类专业群获批第二、三批省级高水平专业群，"白泽"模型入选省级典型案例和世界数字教育大会报告；年均服务企业300余家，被《中国青年报》等主流媒体报道，在省内外多所院校推广，为旅游类专业深化大思政育人、推进数字化转型提供了可复制的实践范式。'
+    '2018年，文化和旅游部组建，文旅融合进入系统推进阶段；全国教育大会强调落实立德树人根本任务，职业教育加快由规模扩张转向内涵提升。由此，旅游类人才培养既要提升红色文化传播与职业能力，又要适应产业对数字素养的新需求。实践中，仍存在育人目标统合不够、红旅资源转化不深、实践场景贯通不足、知行转化评价不准等问题。',
+    '围绕上述问题，成果依托2018年山东省高等学校人文社会科学项目《"工匠精神"为内核的高职旅游专业人才职业素养培育研究》启动探索，2019年形成阶段性成果并进入实践检验，经过六年多实践，构建了"红智双融·场景贯通·知行转化"的大思政实践育人模式。模式以立德树人为根本遵循，吸收情境学习、知行合一和具身学习理论，以"红智双融"为育人理念，以"场景贯通"为实践路径，以"知行转化"为育人指向，构建"目标融通—课程转译—场景贯通—评价校准"逻辑闭环。',
+    '按照"价值引领、情境实践、人机协同、循证改进"的理论转化路径，形成四项递进式改革举措。目标融通，以"红智双融"重塑育人目标，将红色文化传播力、旅游职业胜任力、人工智能应用力和社会责任担当纳入人才培养全过程；课程转译，以双线课程激活红旅资源，通过习近平文化思想"三进"示范课、垂直大模型"白泽"，将红色资源转化为讲解词撰写、智慧导览服务等课程任务；场景贯通，以六景协同延展育人时空，贯通专业课堂、虚拟课堂、实景课堂、赛事课堂、企业课堂、行走课堂六大场景，构建"四阶·双环"实践教学体系，实现专业课100%融入红色元素、100%体现实践育人特征；评价校准，以"三维四度"赋能过程评价，聚焦思想素养、专业素养、数字素养三个维度，构建覆盖课堂表现、实践任务、赛事参与、企业实训的过程性数据采集体系，实现"评价—反馈—改进"动态闭环。',
+    '成果实施以来，学生完成红色短视频1200个，获省级以上技能竞赛奖项39项。旅游管理等3个专业群建成省级高水平专业群，5个专业通过联合国世界旅游组织教育质量认证，建成省级教学团队6个、黄大年式教师团队1个，出版国家规划教材7部。学校牵头制定旅行社经营与管理专业国家教学标准，牵头开发5个省级专业教学标准；"白泽"完成302门专业课智能化改造，获省级典型案例等5项认定。依托产教融合共同体辐射130余家单位，为旅游类专业深化大思政育人、推进数字化转型提供了可复制的实践范式。'
   ]
 }
 
@@ -125,137 +135,53 @@ export const promotions = [
   { name: '桂林唐朝国际旅行社有限责任公司', type: '行业企业', desc: '应用成果中研学旅行课程设计方法，校企共建旅行社经营管理专业。' }
 ]
 
-// ========== 媒体报道（来自佐证材料 六、媒体报道） ==========
+// ========== 媒体报道（来自媒体报道汇总33条.xlsx，仅含有效超链接） ==========
 export const mediaReports = [
-  { type: '微信公众号', source: '山东旅游职业学院公众号', title: '成果相关报道合集', date: '2026', note: 'https://mp.weixin.qq.com/s/Jzo1iobmjIQz4oN5hezYOA' },
-  { type: '权威平台', source: '学习强国', title: '山东旅游职业学院"红色山东·行走课堂"育人实践', date: '2026', note: '相关公开报道' },
-  { type: '权威平台', source: '中国教育在线', title: '白泽大模型亮相世界数字教育大会', date: '2026', note: '相关公开报道' },
-  { type: '权威平台', source: '新华网', title: '产教融合"三台联动"模式获认可', date: '2026', note: '相关公开报道' },
-  { type: '省级媒体', source: '山东卫视', title: '行走课堂让红色教育"活"起来', date: '2026', note: '相关公开报道' },
-  { type: '省级媒体', source: '大众日报', title: '山旅八载探索，绘就红旅育人新图景', date: '2026', note: '相关公开报道' },
-  { type: '省级媒体', source: '中国旅游报', title: '沂蒙红嫂家乡旅游区校企合作纪实', date: '2026', note: '相关公开报道' },
-  { type: '网络媒体', source: '齐鲁网', title: '白泽大模型 100% 覆盖专业课', date: '2026', note: '相关公开报道' },
-  { type: '网络媒体', source: '闪电新闻', title: '让沂蒙精神在行走中传承', date: '2026', note: '相关公开报道' }
+  { category: '红色行走课堂', level: '国家级', source: '中国青年报', title: '"打卡"红色景点，用脚步丈量祖国山河', url: 'http://zqb.cyol.com/html/2024-12/15/nw.D110000zgqnb_20241215_2-04.htm', date: '2024-12-15', note: '最核心佐证-国家级主流媒体' },
+  { category: '红色行走课堂', level: '国家级平台', source: '中国教育在线', title: '"红色山东 行走课堂"表彰大会暨优秀作品展示', url: 'https://www.eol.cn/shandong/sdzy/202412/t20241212_2646152.shtml', date: '2024-12-12', note: '' },
+  { category: '红色行走课堂', level: '省级主流', source: '新浪财经', title: '用好红色资源"润心铸魂" 推进"大思政课"提质增效', url: 'https://finance.sina.com.cn/jjxw/2024-11-13/doc-incvwrzr1433358.shtml', date: '2024-11-13', note: '' },
+  { category: '红色行走课堂', level: '省级主流', source: '网易', title: '山东旅院举办"红色山东 行走课堂"表彰大会', url: 'https://www.163.com/dy/article/JJA752V10530WJIN.html', date: '2024-12-13', note: '' },
+  { category: '红色行走课堂', level: '省级主流', source: '今日头条', title: '红色山东行走的思政课堂', url: 'https://www.toutiao.com/article/7456683040263701029/', date: '2025-01-06', note: '' },
+  { category: '红色行走课堂', level: '省级主流', source: '搜狐', title: '探索红色山东:用脚步铭记历史的思政课堂', url: 'https://www.sohu.com/a/845846626_121924581', date: '2025-01-06', note: '' },
+  { category: '红色行走课堂', level: '省级主流', source: '齐鲁网/闪电新闻', title: '探学文物专列，追寻红色印记（行走课堂系列活动）', url: 'https://so.html5.qq.com/page/real/search_news?docid=70000021_85269d3187f80952', date: '2026-04-06', note: '' },
+  { category: '红色行走课堂', level: '省级主流', source: '齐鲁网/闪电新闻', title: '课堂"握手"文旅一线，技能"对话"市场需求', url: 'https://so.html5.qq.com/page/real/search_news?docid=70000021_66769f1b14599552', date: '2026-04-29', note: '' },
+  { category: '红色行走课堂', level: '省级主流', source: '今日头条', title: '山东旅游职业学院:这堂思政课的坐标在行业一线', url: 'https://www.toutiao.com/article/7628081814392914458/', date: '2026-04-13', note: '' },
+  { category: '白泽大模型', level: '省级主流', source: '齐鲁网', title: '亮相世界数字教育大会！"白泽"入选《中国智慧教育发展报告》', url: 'https://edu.iqilu.com/gxbk/gaoxiao/gxmz/20260515/5914242.shtml', date: '2026-05-15', note: '世界级成果' },
+  { category: '白泽大模型', level: '省级主流', source: '腾讯网', title: '成功入选！山东文旅职业教育打造垂直大模型新标杆', url: 'https://so.html5.qq.com/page/real/search_news?docid=70000021_0796a05548b76352', date: '2026-05-14', note: '' },
+  { category: '白泽大模型', level: '省级主流', source: '腾讯网', title: '旅游职业教育大模型"白泽"上岗', url: 'https://new.qq.com/rain/a/20251122A02UPR00', date: '2025-11-22', note: '' },
+  { category: '白泽大模型', level: '国家级平台', source: '中国教育在线', title: '本地化部署DeepSeek！"白泽"大模型发布上岗', url: 'https://shandong.eol.cn/sdzy/202502/t20250224_2655747.shtml', date: '2025-02-24', note: '' },
+  { category: '白泽大模型', level: '央媒', source: '国际在线（央广网）', title: '山东旅院实现DeepSeek全流程本地化应用', url: 'https://sd.cri.cn/20250226/afdca123-b732-1e51-1007-77c4b43aaf77.html', date: '2025-02-26', note: '' },
+  { category: '白泽大模型', level: '省级主流', source: '搜狐', title: 'AI赋能文旅职业教育：山东旅院开创行业新纪元', url: 'https://www.sohu.com/a/864072008_122006510', date: '2025-02-26', note: '' },
+  { category: '白泽大模型', level: '省级主流', source: '新浪财经', title: '旅游职业学院大模型问世，"震感"明显', url: 'https://t.cj.sina.com.cn/articles/view/3903034300/e8a393bc00101fmri', date: '2025-03-06', note: '' },
+  { category: '白泽大模型', level: '省级主流', source: '网易', title: '重磅！本地化部署DeepSeek！"白泽"大模型发布上岗', url: 'https://www.163.com/dy/article/JPNB3AFV0524BKEM.html', date: '2025-03-03', note: '' },
+  { category: '技能大赛', level: '国家级平台', source: '中国教育在线', title: '世校赛落幕，山旅喜获旅游赛道"一金两银"', url: 'https://shandong.eol.cn/sdzy/202411/t20241104_2640158.shtml', date: '2024-11-04', note: '国家级赛事' },
+  { category: '技能大赛', level: '省级主流', source: '今日头条/大众日报', title: '实现金牌零突破！一金两银好成绩', url: 'https://www.toutiao.com/article/7434068600950702592/', date: '2024-11-06', note: '' },
+  { category: '技能大赛', level: '校级', source: '学院官网', title: '导游服务小组获银奖（世校赛）', url: 'http://www.sdts.net.cn/contents/55/95390.html', date: '2024-11-04', note: '' },
+  { category: '技能大赛', level: '国家级平台', source: '中国教育在线', title: '2023年全国职业院校技能大赛酒店服务赛项一等奖', url: 'https://shandong.eol.cn/sdzy/202309/t20230922_2495531.shtml', date: '2023-09-22', note: '' },
+  { category: 'UNWTO认证与专业群', level: '省级主流', source: '新浪财经/齐鲁壹点', title: '招生报道（5个专业通过UNWTO认证-山东首个）', url: 'https://finance.sina.com.cn/jjxw/2024-07-20/doc-incetiyn4919904.shtml', date: '2024-07-20', note: '' },
+  { category: 'UNWTO认证与专业群', level: '教育部平台', source: '神州学人网', title: '50余名媒体记者走进"山旅"', url: 'http://www.chisa.edu.cn/general/202306/t20230613_2111055506.html', date: '2023-06-13', note: '' },
+  { category: 'UNWTO认证与专业群', level: '省级主流', source: '齐鲁壹点', title: '旅游与休闲管理系招生简章（UNWTO+高水平专业群）', url: 'https://www.ql1d.com/general/21745077.html', date: '2023-07-05', note: '' },
+  { category: 'UNWTO认证与专业群', level: '国家级平台', source: '中国教育在线', title: '专业解析山东旅游职业学院旅游管理专业', url: 'https://shandong.eol.cn/yuanxiaochuanzhen/202005/t20200506_1725296.shtml', date: '2020-05-06', note: '' },
+  { category: '党建与产教融合', level: '校级', source: '学院官网', title: '"红色山东 行走课堂"入选全省教育系统党建创新案例', url: 'http://www.sdts.net.cn/contents/55/95572.html', date: '2025-01-11', note: '' }
 ]
 
-// ========== 其他佐证（来自佐证材料 全篇） ==========
-export const evidences = {
-  toc: {
-    title: '材料目录',
-    items: [
-      '一、成果获奖',
-      '二、教师获奖',
-      '三、育人成效显著',
-      '四、理论研究成果',
-      '五、社会服务',
-      '六、媒体报道',
-      '七、成果推广应用证明'
-    ]
-  },
-  theory: {
-    title: '理论研究成果',
-    desc: '人才培养方案中的数字化转型、理实一体',
-    items: [
-      '旅游管理专业劳动教育纳入人才培养方案',
-      '旅游管理专业实践实训占学学时比50%',
-      '旅行社经营与管理专业实践体系构建',
-      '旅行社经营与管理专业劳动教育纳入人才培养方案',
-      '智慧景区开发与管理专业实践课程体系搭建',
-      '阅途工坊招募通知及方案',
-      '创新导游大赛模式，融入红色和非遗元素',
-      '推动"红色山东·行走课堂"课程思政一体化育人实践',
-      '建设网络平台开发课程',
-      '《导游基础知识》资源包建设示例',
-      '旅行社运营实务（授课人：韩国华等）',
-      '智慧景区服务与管理（授课人：宿翠萍）',
-      '酒店管理与数字化运营（授课人：刘正华等）',
-      '旅游电子商务（授课人：柳青等）',
-      '旅游企业人力资源管理（授课人：刘正华等）',
-      '模拟导游（授课人：谢璐等）',
-      '餐饮服务与管理（授课人：韩爱霞）',
-      '前厅服务与数字化运营（授课人：刘萍、闫雪梅等）',
-      '客房服务与数字化运营（授课人：闫雪梅、刘萍、李文英等）',
-      '饭店管理概论（授课人：闫雪梅）',
-      '酒店人力资源管理（授课人：闫雪梅）',
-      '创新创业教育（授课人：闫雪梅）',
-      '饭店服务心理学（授课人：李文英）',
-      '饭店法规与工程实务（授课人：李文英 张敏敏等）',
-      '国家级教学标准制订',
-      '2019年山东省职业教育教学改革研究项目立项2021年结题（4项）',
-      '2021年鲁教职函〔2021〕56号山东省职业教育教学改革研究立项项目（3项）',
-      '2022年院级课题高水平专业建设群关于教学方法的研究（共19项）',
-      '2023年院级课题高水平专业建设群关于教学方法的研究（共8项）',
-      '2022年院级教改立项',
-      '2023年山东省教改立项',
-      '2022年山东省职业教育在线精品课立项名单（3项）',
-      '2023年省级职业教育在线精品课程立项名单（两项）',
-      '推动"红色山东·行走课堂"课程思政一体化育人实践'
-    ]
-  },
-  textbook: {
-    title: '教材改革（融入数字化）',
-    desc: '旅游管理高水平专业教师参编教材统计表',
-    items: [
-      { name: '《酒店运营管理职业技能等级认证教材》（中级）', author: '韩爱霞、解姣姣、冯英梅', year: '2021', publisher: '江苏凤凰教育出版社' },
-      { name: '酒店实训之前厅服务', author: '杨喆、刘正华', year: '2021', publisher: '旅游教育出版社' },
-      { name: '旅行策划（初级）', author: '姜宝辉、陈静', year: '2021.07', publisher: '高等教育出版社' },
-      { name: '旅行社计调业务', author: '王煜琴、李鑫、孙树伟', year: '2021', publisher: '旅游教育出版社' },
-      { name: '模拟导游', author: '王煜琴、王新平', year: '2021', publisher: '旅游教育出版社' },
-      { name: '旅游企业财务管理', author: '王艳玲、王蕾', year: '2022.3', publisher: '中国人民大学出版社' },
-      { name: '《民宿管家服务》', author: '刘萍、闫雪梅', year: '2022.8', publisher: '旅游教育出版社' },
-      { name: '《前厅服务与数字化运营》', author: '刘萍、闫雪梅', year: '2022.8', publisher: '旅游教育出版社' },
-      { name: '《客房服务与数字化运营》', author: '闫雪梅、刘萍、李文英', year: '2022.8', publisher: '旅游教育出版社' },
-      { name: '《餐饮服务与数字化运营》', author: '韩爱霞、牟青、陈永燕', year: '2022.8', publisher: '旅游教育出版社' },
-      { name: '《酒店数字化营销》', author: '孙健、解姣姣', year: '2022.8', publisher: '旅游教育出版社' },
-      { name: '《酒水服务与酒吧管理》', author: '牟青、韩爱霞', year: '2022.8', publisher: '旅游教育出版社' },
-      { name: '《酒店督导管理》', author: '孙健、路飞、冯英梅', year: '2022.8', publisher: '旅游教育出版社' },
-      { name: '《饭店信息系统：OPERA操作实务》', author: '孙健', year: '2022.8', publisher: '旅游教育出版社' },
-      { name: '研学旅行课程设计', author: '谢璐', year: '2024.06', publisher: '华中科技大学出版社' },
-      { name: '旅行社数字化运营实务', author: '韩国华', year: '2024.08', publisher: '华中科技大学出版社' },
-      { name: '旅游职业道德（第四版）', author: '魏凯、曹常玲、宿翠萍', year: '2023.07', publisher: '中国旅游出版社' },
-      { name: '导游服务能力——山东导游现场考试实务（第4版）', author: '王煜琴', year: '2023.07', publisher: '中国旅游出版社' },
-      { name: '《酒店数字化营销》', author: '刘晓林、孙赫', year: '2023.10', publisher: '中国旅游出版社' },
-      { name: '《餐饮服务与数字化运营》第二版', author: '韩爱霞、牟青、陈永燕', year: '2024.6', publisher: '旅游教育出版社' },
-      { name: '《民宿数字化运营与管理》', author: '乔海燕、刘晓林、高英英', year: '2024.3', publisher: '旅游教育出版社' }
-    ]
-  },
-  practice: {
-    title: '实践教学基地建设',
-    desc: '实践教学条件全面升级',
-    items: [
-      '酒店管理智能仿真实训中心（含6间校企共建样板间）',
-      '杭州开元森泊度假乐园样板间',
-      '杭州英冠索菲特酒店样板间',
-      '旅游数字化实训中心',
-      '营地实景体验区',
-      '5G旅游实训室',
-      '模拟导游实训室改造'
-    ]
-  },
-  service: {
-    title: '社会服务',
-    desc: '旅游行业管理、服务能力提升培训',
-    items: [
-      '2021-2022年行业培训1113人次，创收138.593万元',
-      '2023年培训8254人次，创收23.111万元',
-      '2024年培训542人次，收入53.831万元',
-      '2024年对外交流合作培训收入124.017万元',
-      '共计培训人数9909人次',
-      '横向课题合计203.8万元（27项）',
-      '培训乡村旅游骨干合计738人次',
-      '支持乡村振兴战略实施',
-      '支持兄弟省市旅游管理水平提升（新疆培训等）'
-    ]
-  },
-  intl: {
-    title: '国际化成果',
-    desc: '国际标准与国际合作',
-    items: [
-      '国际标准—独立开发一项，参与一项',
-      '旅游管理、酒店管理2个专业对接国际旅游标准',
-      '全力推动数字化转型',
-      '编制山东省酒店数字化运营人才培训基地方案并申办完成'
-    ]
-  }
-}
+// ========== 其他佐证（来自佐证材料 全篇 + 16个PDF文件） ==========
+export const evidencePDFs = [
+  { key: 'case1', label: '案例1：行走课堂·数智铸魂：旅游类专业"红色山东"思政育人创新实践' },
+  { key: 'case2', label: '案例2：校企协三方联动：创新"师带徒"协同育人机制实践' },
+  { key: 'case3', label: '案例3：标准引领·产教适配：牵头开发省级旅游类专业教学指导方案的创新实践' },
+  { key: 'case4', label: '案例4：双元三融·数智赋能：人工智能一流核心课程建设探索与实践' },
+  { key: 'case5', label: '案例5：活页模块·数智融合：《人工智能应用基础》新形态教材开发实践' },
+  { key: 'case6', label: '案例6：行业深耕·教学反哺：双师型教师韩兆君"产教双向赋能"成长案例' },
+  { key: 'case7', label: '案例7：基地共建·实战育人："途牛—山旅"旅游直播产教融合实训基地建设案例' },
+  { key: 'case8', label: '案例8：白泽赋能·生态重构：旅游职业教育"AI+教学"数字化新生态构建实践' },
+  { key: 'case9', label: '案例9：留学山旅·中蒙共育："一带一路"背景下旅游类国际化人才培养创新实践' },
+  { key: 'cooperation', label: '创新校企合作机制' },
+  { key: 'base', label: '建设产教融合实训基地' },
+  { key: 'museum', label: '新增博物馆研学导师' },
+  { key: 'textbook', label: '新增教材' },
+  { key: 'project', label: '新增横向课题' },
+  { key: 'mentor', label: '特聘产业导师' },
+  { key: 'award2025', label: '新增2025年度优秀理事单位匾额' }
+]
 

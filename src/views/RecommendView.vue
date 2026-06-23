@@ -1,6 +1,6 @@
 <template>
   <SecondaryLayout st="推荐书" :si="si" v-model="key" pt="推荐书" cr="推荐书">
-    <ContentLoader base="declaration" />
+    <ContentLoader base="recommend" />
   </SecondaryLayout>
 </template>
 

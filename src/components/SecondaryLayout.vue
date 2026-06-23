@@ -1,6 +1,6 @@
 <template>
   <div class="pg">
-    <LeftSidebar :title="st" :items="si || []" :model-value="mv" :show-num="sn" @update:model-value="$emit('update:modelValue',$event)"/>
+    <LeftSidebar :title="st" :items="si || []" :model-value="modelValue || mv || ''" :show-num="sn" @update:model-value="$emit('update:modelValue',$event)"/>
     <div class="pg-mn">
       <nav class="crumb"><el-icon class="crumb-icon"><Location/></el-icon><router-link to="/">首页</router-link><span class="sep">›</span><router-link v-if="pt" :to="route.path">{{ pt }}</router-link><template v-if="pt && cr"><span class="sep">›</span><span class="cur">{{ cr }}</span></template></nav>
       <article class="pg-ct"><slot/></article>
@@ -13,12 +13,12 @@ import LeftSidebar from '@/components/LeftSidebar.vue'
 import { Location } from '@element-plus/icons-vue'
 import { useRoute } from 'vue-router'
 const route = useRoute()
-defineProps({st:String,si:Array,mv:String,sn:{type:Boolean,default:false},pt:{default:''},cr:String})
+defineProps({st:String,si:Array,mv:String,sn:{type:Boolean,default:false},pt:{default:''},cr:String,modelValue:{type:String,default:''}})
 defineEmits(['update:modelValue'])
 </script>
 
 <style lang="scss" scoped>
-.pg{display:grid;grid-template-columns:200px 1fr;gap:48px;padding:32px 0 48px}
+.pg{display:grid;grid-template-columns:240px 1fr;gap:48px;padding:32px 0 48px;align-items:start}
 .pg-mn{min-width:0}
 .crumb{font-size:13px;color:var(--txt3);margin-bottom:16px;font-family:"Noto Sans SC",sans-serif;display:flex;align-items:center;gap:6px;background:var(--red-ll);padding:10px 16px;border-radius:4px}
 .crumb-icon{color:var(--red);font-size:16px;flex-shrink:0}

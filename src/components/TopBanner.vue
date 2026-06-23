@@ -15,7 +15,7 @@
         <div class="bnr-txt">
           <h1>国家级教学成果奖申报</h1>
           <h2>
-            红旅铸魂·数智赋能：旅游类专业"红智双融·螺旋递进"育人模式创新与实践
+            红智双融·场景贯通·知行转化：旅游类专业大思政实践育人模式创新与实践
           </h2>
         </div>
       </div>
@@ -27,6 +27,11 @@
           <span /><span /><span />
         </button>
         <div class="nav-ls" :class="{ on: navOn }">
+          <button class="nav-close" @click="navOn = false">
+            <span class="nav-close-bar nav-close-bar1"></span>
+            <span class="nav-close-bar nav-close-bar2"></span>
+          </button>
+          <div class="nav-ls-scroll">
           <div v-for="m in menus" :key="m.k" class="nav-it-wrap">
             <router-link
               :to="m.q ? { path: m.p, query: m.q } : m.p"
@@ -47,6 +52,7 @@
               >
             </div>
           </div>
+          </div>
         </div>
       </div>
     </nav>
@@ -64,22 +70,28 @@ const navOn = ref(false);
 watch(navOn, (on) => {
   document.body.style.overflow = on ? "hidden" : "";
 });
-const hasIndex = new Set(['summary', 'effect', 'media', 'international', 'evidence'])
+const hasIndex = new Set([
+  "summary",
+  "effect",
+  "media",
+  "international",
+  "evidence",
+]);
 
 const menus = topNavItems.map((m) => {
   const children = m.children?.map((c) => {
-    const [path, qs] = c.path.split('?')
-    const query = qs ? Object.fromEntries(new URLSearchParams(qs)) : undefined
-    return { k: c.key, l: c.label, p: path, q: query }
-  })
-  const jumpToChild = children?.length && !hasIndex.has(m.key)
+    const [path, qs] = c.path.split("?");
+    const query = qs ? Object.fromEntries(new URLSearchParams(qs)) : undefined;
+    return { k: c.key, l: c.label, p: path, q: query };
+  });
+  const jumpToChild = children?.length && !hasIndex.has(m.key);
   return {
     k: m.key,
     l: m.label,
     p: jumpToChild ? children[0].p : m.path,
     q: jumpToChild ? children[0].q : undefined,
     children,
-  }
+  };
 });
 
 const isActive = (m) => {
@@ -89,10 +101,10 @@ const isActive = (m) => {
 };
 
 const isSubActive = (p, q) => {
-  if (route.path !== p) return false
-  if (!q) return true
-  return Object.entries(q).every(([k, v]) => route.query[k] === v)
-}
+  if (route.path !== p) return false;
+  if (!q) return true;
+  return Object.entries(q).every(([k, v]) => route.query[k] === v);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -221,7 +233,8 @@ const isSubActive = (p, q) => {
   flex: 1;
   position: relative;
   &:hover .nav-sub {
-    max-height: 600px;
+    max-height: 800px;
+    overflow-y: auto;
     visibility: visible;
     opacity: 1;
   }
@@ -289,6 +302,7 @@ const isSubActive = (p, q) => {
 }
 
 @media (max-width: 1024px) {
+  .nav { z-index: 300; }
   .bnr-txt h1 {
     font-size: 26px;
   }
@@ -301,19 +315,31 @@ const isSubActive = (p, q) => {
   }
   .nav-ls {
     display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 200;
     background: var(--red);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    &.on {
-      display: flex;
-      max-height: calc(100vh - 56px);
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-    }
+    overflow: hidden;
+    &.on { display: flex; flex-direction: column; }
+  }
+  .nav-close {
+    display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px;
+    background: none; border: 0; cursor: pointer;
+    padding: 10px; margin: 4px 0 0 4px;
+  }
+  .nav-close-bar {
+    display: block;
+    width: 20px; height: 2px; background: #fff;
+    position: absolute;
+    transition: 0.2s;
+  }
+  .nav-close-bar1 { transform: rotate(45deg); }
+  .nav-close-bar2 { transform: rotate(-45deg); }
+  .nav-ls-scroll {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .nav-it-wrap {
     flex: none;
