@@ -229,6 +229,13 @@ const isSubActive = (p, q) => {
   display: flex;
   width: 100%;
 }
+.nav-close {
+  display: none;
+}
+.nav-ls-scroll {
+  display: flex;
+  flex: 1;
+}
 .nav-it-wrap {
   flex: 1;
   position: relative;
@@ -301,6 +308,11 @@ const isSubActive = (p, q) => {
   }
 }
 
+@keyframes menuItemIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 @media (max-width: 1024px) {
   .nav { z-index: 300; }
   .bnr-txt h1 {
@@ -337,6 +349,7 @@ const isSubActive = (p, q) => {
   .nav-close-bar1 { transform: rotate(45deg); }
   .nav-close-bar2 { transform: rotate(-45deg); }
   .nav-ls-scroll {
+    display: block;
     flex: 1;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
@@ -374,6 +387,21 @@ const isSubActive = (p, q) => {
       color: var(--red-d);
     }
   }
+
+  .nav-ls.on .nav-close {
+    animation: menuItemIn .25s ease both;
+  }
+  .nav-ls.on .nav-ls-scroll .nav-it-wrap {
+    animation: menuItemIn .3s ease both;
+  }
+  .nav-ls.on .nav-ls-scroll .nav-it-wrap:nth-child(1) { animation-delay: .04s; }
+  .nav-ls.on .nav-ls-scroll .nav-it-wrap:nth-child(2) { animation-delay: .08s; }
+  .nav-ls.on .nav-ls-scroll .nav-it-wrap:nth-child(3) { animation-delay: .12s; }
+  .nav-ls.on .nav-ls-scroll .nav-it-wrap:nth-child(4) { animation-delay: .16s; }
+  .nav-ls.on .nav-ls-scroll .nav-it-wrap:nth-child(5) { animation-delay: .20s; }
+  .nav-ls.on .nav-ls-scroll .nav-it-wrap:nth-child(6) { animation-delay: .24s; }
+  .nav-ls.on .nav-ls-scroll .nav-it-wrap:nth-child(7) { animation-delay: .28s; }
+  .nav-ls.on .nav-ls-scroll .nav-it-wrap:nth-child(8) { animation-delay: .32s; }
 }
 
 @media (max-width: 767px) {
