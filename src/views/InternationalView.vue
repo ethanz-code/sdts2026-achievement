@@ -29,6 +29,6 @@ const list = [
 </script>
 
 <style lang="scss" scoped>
-.sec-h { font-size: 20px; font-weight: 600; color: var(--red-d); margin: 0 0 16px; font-family: "Noto Serif SC", serif; }
-.list p { font-size: 15px; line-height: 2.2; color: var(--txt); font-family: "Noto Serif SC", serif; margin: 0 0 6px; }
+.sec-h { font-size: 20px; font-weight: 700; color: var(--red-d); margin: 0 0 16px; font-family: var(--font-serif); letter-spacing:1px; }
+.list p { font-size: 15px; line-height: 2.2; color: var(--txt); font-family: var(--font-sans); margin: 0 0 6px; }
 </style>

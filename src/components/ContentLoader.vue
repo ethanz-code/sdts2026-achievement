@@ -124,7 +124,7 @@ watch([dirName, subName], load)
 .cl { min-height: 500px; }
 .cl-load {
   display: flex; align-items: center; justify-content: center; min-height: 500px;
-  font-size: 15px; color: var(--txt2); font-family: "Noto Sans SC", sans-serif;
+  font-size: 15px; color: var(--txt2); font-family: var(--font-sans);
 }
 .cl-md {
   padding: 28px 32px;
@@ -135,7 +135,7 @@ watch([dirName, subName], load)
   font-size: 17px;
   line-height: 2;
   color: var(--txt);
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
 }
 .cl-md :deep(h2) {
   font-size: 20px;
@@ -169,7 +169,7 @@ watch([dirName, subName], load)
 .cl-txt pre {
   white-space: pre-wrap; word-break: break-word;
   font-size: 17px; line-height: 2; color: var(--txt);
-  font-family: var(--font-serif); padding: 28px 32px;
+  font-family: var(--font-sans); padding: 28px 32px;
   background: #fff; border: 1px solid #eee; border-radius: 2px;
   min-height: 500px;
 }
@@ -177,7 +177,7 @@ watch([dirName, subName], load)
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   min-height: 500px; text-align: center; padding: 60px 24px;
   background: #fff; border: 1px dashed #ddd; border-radius: 4px;
-  font-family: "Noto Sans SC", sans-serif;
+  font-family: var(--font-sans);
 }
 .cl-empty-num { font-size: 56px; font-weight: 700; color: var(--red-d); margin: 0 0 8px; line-height: 1; font-family: var(--font-serif); }
 .cl-empty-reason { font-size: 16px; color: var(--txt); margin: 0 0 12px; }

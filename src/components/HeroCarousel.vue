@@ -73,7 +73,7 @@ defineEmits(['prev', 'next', 'dot'])
     cursor: pointer;
     transition: all 0.25s;
     z-index: 2;
-    font-family: Georgia, serif;
+    font-family: var(--font-serif);
     &:hover { background: rgba(139, 0, 0, 0.6); color: #fff; }
   }
   .hero-prev { left: 16px; }

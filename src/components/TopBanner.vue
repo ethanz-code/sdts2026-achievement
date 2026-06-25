@@ -2,23 +2,30 @@
   <header class="hdr">
     <div class="bnr">
       <div class="bnr-bg-1"></div>
-
       <div class="bnr-bg-3"></div>
       <div class="bnr-mist"></div>
       <div class="bnr-red-overlay"></div>
+      <div class="bnr-bottom-glow"></div>
+      <div class="bnr-flare"></div>
       <div class="container bnr-inner">
-        <img
-          class="bnr-logo"
-          src="/images/school-emblem.webp"
-          alt="山东旅游职业学院"
-        />
-        <div class="bnr-txt">
-          <h1>国家级教学成果奖申报</h1>
-          <h2>
-            红智双融·场景贯通·知行转化：旅游类专业大思政实践育人模式创新与实践
-          </h2>
+        <div class="bnr-body">
+          <div class="bnr-brand">
+            <img
+              class="bnr-logo"
+              src="/images/school-emblem.webp"
+              alt="山东旅游职业学院"
+            />
+            <span class="bnr-school-name">山东旅游职业学院</span>
+          </div>
+          <div class="bnr-txt">
+            <h1>国家教学成果奖申报</h1>
+            <h2>
+              红智双融·场景贯通·知行转化：旅游类专业大思政实践育人模式创新与实践
+            </h2>
+          </div>
         </div>
       </div>
+      <div class="bnr-gold-line"></div>
     </div>
 
     <nav class="nav">
@@ -70,6 +77,7 @@ const navOn = ref(false);
 watch(navOn, (on) => {
   document.body.style.overflow = on ? "hidden" : "";
 });
+
 const hasIndex = new Set([
   "summary",
   "effect",
@@ -115,90 +123,105 @@ const isSubActive = (p, q) => {
 }
 .bnr-bg-1 {
   position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 90%;
+  left: 0; top: 0; bottom: 0; width: 90%;
   background: url("/images/banner-blend-left.webp") center/cover;
   -webkit-mask-image: linear-gradient(to right, #000 55%, transparent 100%);
   mask-image: linear-gradient(to right, #000 55%, transparent 100%);
 }
 .bnr-bg-3 {
   position: absolute;
-  right: -20%;
-  top: 0;
-  bottom: 0;
-  width: 45%;
+  right: -20%; top: 0; bottom: 0; width: 45%;
   background: url("/images/banner-blend-right.webp") left center/cover;
   -webkit-mask-image: linear-gradient(to left, #000 40%, transparent 100%);
   mask-image: linear-gradient(to left, #000 40%, transparent 100%);
 }
+/* 红色色相叠加 - 代替纯黑蒙版 */
 .bnr-mist {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(255, 255, 255, 0.22) 0%,
-    rgba(255, 255, 255, 0.08) 40%,
-    transparent 70%
-  );
+  position: absolute; inset: 0; z-index: 2;
+  background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,.18) 0%, rgba(255,255,255,.06) 40%, transparent 70%);
 }
+/* 暗角 + 红色色相 */
 .bnr-red-overlay {
+  position: absolute; inset: 0; z-index: 2;
+  background:
+    linear-gradient(90deg, rgba(80,10,10,.7) 0%, rgba(40,5,5,.45) 50%, rgba(80,10,10,.7) 100%),
+    radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,.35) 100%);
+}
+/* 金色光束 */
+.bnr-flare {
   position: absolute;
-  inset: 0;
+  left: 0; right: 0;
+  top: 50%;
+  height: 60px;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,215,140,.0) 15%, rgba(255,220,150,.45) 50%, rgba(255,215,140,.0) 85%, transparent 100%);
+  filter: blur(8px);
+  transform: translateY(-50%);
+}
+/* 底部暖光渐变 */
+.bnr-bottom-glow {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 60%;
   z-index: 2;
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.5) 0%,
-    rgba(0, 0, 0, 0.35) 50%,
-    rgba(0, 0, 0, 0.5) 100%
-  );
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 0%, rgba(180,20,20,.15) 50%, rgba(120,10,10,.5) 100%);
 }
 .bnr-inner {
-  position: relative;
-  z-index: 4;
+  position: relative; z-index: 4; height: 100%;
+}
+.bnr-body {
+  position: absolute;
   display: flex;
   align-items: center;
-  height: 100%;
-  gap: 32px;
-  padding-left: 40px;
+  gap: 40px;
+  white-space: nowrap;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.bnr-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
 }
 .bnr-logo {
-  width: 85px;
-  height: 85px;
-  object-fit: contain;
-  flex-shrink: 0;
-  filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.35));
+  width: 85px; height: 85px; object-fit: contain; flex-shrink: 0;
+  filter: drop-shadow(0 3px 10px rgba(0,0,0,.35));
+}
+.bnr-school-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #f0e6c8;
+  font-family: var(--font-sans);
+  letter-spacing: 6px;
+  text-shadow: 0 1px 4px rgba(0,0,0,.5);
+  white-space: nowrap;
 }
 .bnr-txt {
-  flex: 1;
   color: #fff;
   h1 {
-    font-size: 44px;
-    font-weight: 400;
-    line-height: 1.4;
-    letter-spacing: 6px;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-    font-family: var(--font-serif);
-    color: #fff;
+    font-size: 42px; font-weight: 700; line-height: 1.3; letter-spacing: 6px;
+    text-shadow: 0 2px 8px rgba(0,0,0,.4);
+    font-family: var(--font-serif); color: #fff;
   }
   h2 {
-    font-size: 20px;
-    color: #ffe0b2;
-    font-weight: 400;
-    line-height: 1.2;
-    letter-spacing: 2px;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-    font-family: "Ma Shan Zheng", "STKaiti", "KaiTi", "楷体", serif;
+    font-size: 28px; color: #f7e5b0; font-weight: 700; line-height: 1.4;
+    letter-spacing: 4px; text-shadow: 0 2px 6px rgba(0,0,0,.6);
+    font-family: var(--font-serif); margin-top: 8px;
   }
+}
+.bnr-gold-line{
+  position:absolute; bottom:0; left:0; right:0; z-index:5; height:4px;
+  background:linear-gradient(90deg,transparent 5%,var(--gold) 20%,var(--gold-d) 50%,var(--gold) 80%,transparent 95%)
 }
 
 .nav {
   background: var(--red);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  position: sticky; top: 0; z-index: 100;
 }
 .nav-btn {
   display: none;
@@ -254,18 +277,28 @@ const isSubActive = (p, q) => {
   text-align: center;
   font-size: 15px;
   font-weight: 500;
-  transition: background 0.2s;
+  transition: all 0.3s;
   font-family: var(--font-sans);
+  position: relative;
+  overflow: hidden;
+  &::after{
+    content:'';position:absolute;bottom:0;left:50%;right:50%;
+    height:3px;background:var(--gold);
+    transition:all .35s cubic-bezier(.4,0,.2,1);
+    border-radius:2px 2px 0 0
+  }
   &:hover {
-    background: rgba(0, 0, 0, 0.12);
-    color: #fff;
+    background: rgba(255,255,255,.06);
+    color: var(--gold);
     text-decoration: none;
   }
+  &:hover::after{left:15%;right:15%}
   &.act {
-    background: var(--yellow);
-    color: var(--red-d);
-    font-weight: 600;
+    color: var(--gold);
+    font-weight: 700;
+    background: rgba(255,255,255,.04);
   }
+  &.act::after{left:8%;right:8%}
 }
 .nav-sub {
   position: absolute;
@@ -297,15 +330,24 @@ const isSubActive = (p, q) => {
   white-space: nowrap;
   transition: all 0.18s;
   border-bottom: 1px solid #f0f0f0;
+  position: relative;
   &:last-child {
     border-bottom: none;
   }
   &:hover,
   &.act {
-    background: var(--yellow);
+    background: var(--cream);
     color: var(--red-d);
+    font-weight: 600;
     text-decoration: none;
   }
+  &::before{
+    content:'';position:absolute;left:0;top:6px;bottom:6px;width:3px;
+    background:var(--gold);border-radius:0 2px 2px 0;
+    transform:scaleY(0);transition:transform .2s
+  }
+  &:hover::before,
+  &.act::before{transform:scaleY(1)}
 }
 
 @keyframes menuItemIn {
@@ -315,11 +357,23 @@ const isSubActive = (p, q) => {
 
 @media (max-width: 1024px) {
   .nav { z-index: 300; }
+  .bnr-body {
+    gap: 24px;
+    left: 24px;
+  }
+  .bnr-brand {
+    gap: 4px;
+  }
+  .bnr-school-name {
+    font-size: 13px;
+    letter-spacing: 4px;
+  }
   .bnr-txt h1 {
     font-size: 26px;
   }
   .bnr-txt h2 {
-    font-size: 15px;
+    font-size: 20px;
+    letter-spacing: 2px;
   }
 
   .nav-btn {
@@ -383,7 +437,7 @@ const isSubActive = (p, q) => {
     padding-left: 36px;
     font-size: 13px;
     &:hover {
-      background: var(--yellow);
+      background: var(--gold-ll);
       color: var(--red-d);
     }
   }
@@ -406,45 +460,67 @@ const isSubActive = (p, q) => {
 
 @media (max-width: 767px) {
   .bnr {
-    height: auto;
-    padding: 20px 14px;
+    height: auto !important;
+    padding: 24px 14px;
     text-align: center;
   }
-  .bnr-inner {
+  .bnr-body {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
     flex-direction: column;
-    gap: 10px;
-    text-align: center;
+    gap: 16px;
+    white-space: normal;
+  }
+  .bnr-brand {
+    gap: 4px;
+  }
+  .bnr-school-name {
+    font-size: 14px;
+    letter-spacing: 4px;
   }
   .bnr-logo {
     width: 56px;
     height: 56px;
   }
+  .bnr-txt {
+    text-align: center;
+  }
   .bnr-txt h1 {
-    font-size: 17px;
-    letter-spacing: 1px;
+    font-size: 20px;
+    letter-spacing: 2px;
   }
   .bnr-txt h2 {
-    font-size: 13px;
+    font-size: 16px;
+    letter-spacing: 2px;
   }
 }
 @media (max-width: 480px) {
   .bnr {
-    padding: 16px 10px;
+    padding: 18px 10px;
+  }
+  .bnr-body {
+    gap: 12px;
+  }
+  .bnr-brand {
+    gap: 3px;
+  }
+  .bnr-school-name {
+    font-size: 12px;
+    letter-spacing: 3px;
   }
   .bnr-logo {
     width: 44px;
     height: 44px;
   }
-  .bnr-inner {
-    padding-left: 0;
-  }
   .bnr-txt h1 {
-    font-size: 15px;
-    letter-spacing: 0;
+    font-size: 16px;
+    letter-spacing: 1px;
   }
   .bnr-txt h2 {
-    font-size: 11px;
-    letter-spacing: 0;
+    font-size: 14px;
+    letter-spacing: 1px;
   }
 }
 </style>

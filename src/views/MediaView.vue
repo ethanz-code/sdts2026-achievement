@@ -56,13 +56,13 @@ const groupedReports = computed(() => {
 }
 .media-tbl {
   width: 100%; border-collapse: collapse;
-  font-family: "PingFang SC","Microsoft YaHei",sans-serif;
+  font-family: var(--font-sans);
   font-size: 14px; margin-bottom: 8px;
 }
 .media-tbl th {
   text-align: left; font-weight: 600; color: var(--txt2);
-  padding: 8px 12px; background: var(--red-ll);
-  font-size: 13px; border-bottom: 2px solid #e8d8d8;
+  padding: 8px 12px; background: var(--cream);
+  font-size: 13px; border-bottom: 2px solid var(--gold-border);
 }
 .media-tbl td {
   padding: 10px 12px; border-bottom: 1px solid #f0e8e8;

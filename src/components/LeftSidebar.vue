@@ -7,6 +7,8 @@
         :key="item.key"
         :class="{ on: isActive(item) }"
         @click="onClick(item)"
+        @mouseenter="emit('hover-item', item)"
+        @mouseleave="emit('leave-item')"
       >
         <span class="n" v-if="showNum">{{ String(i + 1).padStart(2, '0') }}</span>
         <span class="l">{{ item.label }}</span>
@@ -24,7 +26,7 @@ const props = defineProps({
   modelValue:{ type: String, default: '' },
   showNum:   { type: Boolean, default: false }
 })
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'hover-item', 'leave-item'])
 
 const route = useRoute()
 const router = useRouter()
@@ -49,58 +51,72 @@ const onClick = (item) => {
 </script>
 
 <style lang="scss" scoped>
-.sb{padding:0;background:var(--red-ll);border-radius:2px}
+.sb{background:#fff;border-radius:6px;box-shadow:var(--shadow-sm);overflow:hidden;border:1px solid #ede5dd}
+
 .sb-tit{
-  font-size:16px;font-weight:700;color:#fff;padding:12px 20px;
-  background:linear-gradient(180deg,var(--red) 0%,var(--red-d) 100%);
-  letter-spacing:2px;box-shadow:0 2px 6px rgba(183,28,28,.25);
-  font-family:var(--font-serif);position:relative;border-radius:2px;
+  font-size:18px;font-weight:700;color:#fff;padding:16px 20px;
+  background:linear-gradient(135deg,var(--red) 0%,#9b1a1a 100%);
+  letter-spacing:4px;
+  font-family:var(--font-serif);position:relative;
 }
-.sb-tit::after{
-  content:'';position:absolute;right:-14px;top:0;bottom:0;width:14px;
-  background:linear-gradient(180deg,var(--red-d) 0%,var(--red) 100%);
-  clip-path:polygon(0 0,100% 50%,0 100%);
-}
-.sb-ls{
-  padding:8px 0;
-  background:var(--red-ll);
-  border-radius:0 0 2px 2px;
-}
+.sb-tit::after{content:'';position:absolute;bottom:0;left:10%;right:10%;height:2px;background:var(--gold);border-radius:2px}
+
+.sb-ls{padding:6px 0;background:#fff}
 .sb-ls li{
-  display:flex;align-items:center;gap:8px;
-  padding:11px 18px 11px 14px;
+  display:flex;align-items:center;gap:10px;
+  padding:13px 20px 13px 18px;
   font-size:14px;cursor:pointer;color:var(--txt2);
-  font-family:"PingFang SC","Microsoft YaHei",sans-serif;
-  transition:all .2s;position:relative;
-  border-left:3px solid #e8d8d8;
+  font-family:var(--font-sans);font-weight:500;
+  transition:all .3s cubic-bezier(.4,0,.2,1);position:relative;
 }
+.sb-ls li::before{
+  content:'';width:5px;height:5px;border-radius:50%;
+  background:#d5c5b8;flex-shrink:0;
+  transition:all .35s cubic-bezier(.4,0,.2,1)
+}
+.sb-ls li::after{
+  content:'';position:absolute;bottom:0;left:18px;right:18px;
+  height:1px;background:linear-gradient(90deg,#f0e8e0 0%,transparent 100%)
+}
+.sb-ls li:last-child::after{display:none}
+
 .sb-ls li:hover{
   color:var(--red);
-  background:rgba(255,255,255,.6);
-  border-left-color:#c9a0a0;
+  background:linear-gradient(90deg,#fdf8f0 0%,transparent 60%);
+  padding-left:24px
+}
+.sb-ls li:hover::before{
+  background:var(--gold);
+  transform:scale(1.4);
+  box-shadow:0 0 0 3px rgba(200,164,90,.15)
 }
 .sb-ls li.on{
   color:var(--red-d);font-weight:700;
-  background:#fff;
-  border-left:4px solid var(--red);
+  background:linear-gradient(90deg,#fcf5e0 0%,transparent 70%);
 }
-.sb-ls .n{font-family:Georgia,serif;font-size:11px;color:var(--txt3);min-width:20px;flex-shrink:0}
+.sb-ls li.on::before{
+  background:var(--red);
+  transform:scale(1.2);
+  box-shadow:none
+}
+.sb-ls .n{font-family:var(--font-serif);font-size:11px;color:var(--txt3);min-width:20px;flex-shrink:0}
+.sb-ls li.on .n{color:var(--red)}
 .sb-ls .l{line-height:1.5;flex:1}
 
 @media(max-width:1024px){.sb{width:240px}}
 @media(max-width:767px){
   .sb{width:100%}
-  .sb-tit::after{width:10px;right:-10px}
-  .sb-tit{padding-right:22px;border-radius:2px}
   .sb-ls{
-    display:grid;grid-template-columns:1fr 1fr;gap:4px 8px;padding:6px;
-    border-radius:2px;
+    display:grid;grid-template-columns:1fr 1fr;gap:2px 8px;padding:6px;
   }
-  .sb-ls li{padding:9px 10px 9px 8px;font-size:13px;border-radius:3px;gap:4px;border-left-width:2px}
-  .sb-ls li.on{border-left-width:3px}
+  .sb-ls li{padding:10px 12px;font-size:13px;border-radius:4px;gap:6px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+  .sb-ls li::after{display:none}
+  .sb-ls li::before{width:4px;height:4px}
+  .sb-ls li.on{background:var(--gold-ll)}
+  @for $i from 1 through 7{.sb-ls li:nth-child(#{$i}){animation-delay:0s}}
 }
 @media(max-width:480px){
-  .sb-ls{grid-template-columns:1fr;gap:2px}
-  .sb-ls li{padding:8px 12px 8px 8px;font-size:12px}
+  .sb-ls{grid-template-columns:1fr;gap:3px}
+  .sb-ls li{padding:9px 12px;font-size:12px}
 }
 </style>

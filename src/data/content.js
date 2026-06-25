@@ -8,7 +8,7 @@
 // ========== 顶部导航 ==========
 export const topNavItems = [
   { key: 'home', label: '首页', path: '/' },
-  { key: 'recommend', label: '推荐书', path: '/recommend' },
+  { key: 'recommend', label: '申报书', path: '/recommend' },
   { key: 'summary', label: '总结报告', path: '/summary', children: [
     { key: 'intro', label: '成果简介', path: '/summary?section=intro' },
     { key: 'problem', label: '教学问题及方法', path: '/summary?section=problem' },
@@ -39,11 +39,10 @@ export const topNavItems = [
     { key: 'case9', label: '案例9：留学山旅·中蒙共育', path: '/evidence?filter=case9' },
     { key: 'cooperation', label: '创新校企合作机制', path: '/evidence?filter=cooperation' },
     { key: 'base', label: '建设产教融合实训基地', path: '/evidence?filter=base' },
-    { key: 'museum', label: '新增博物馆研学导师', path: '/evidence?filter=museum' },
-    { key: 'textbook', label: '新增教材', path: '/evidence?filter=textbook' },
-    { key: 'project', label: '新增横向课题', path: '/evidence?filter=project' },
-    { key: 'mentor', label: '特聘产业导师', path: '/evidence?filter=mentor' },
-    { key: 'award2025', label: '新增2025年度优秀理事单位匾额', path: '/evidence?filter=award2025' }
+    { key: 'teacher', label: '师资队伍建设', path: '/evidence?filter=teacher' },
+    { key: 'textbook', label: '出版教材著作和论文', path: '/evidence?filter=textbook' },
+    { key: 'project', label: '社会服务', path: '/evidence?filter=project' },
+    { key: 'award2025', label: '2025年度优秀理事单位匾额', path: '/evidence?filter=award2025' }
   ]}
 ]
 
@@ -60,6 +59,7 @@ export const overview = {
 
 // ========== 左侧成果导览（来自申报书） ==========
 export const leftSidebarItems = [
+  { key: 'theory', label: '理论成果' },
   { key: 'baize', label: '旅游职业教育大模型-白泽' },
   { key: 'redBrand', label: '红色山东 行走课堂品牌活动' },
   { key: 'problem', label: '成果解决的教学问题与方法' },
@@ -166,6 +166,31 @@ export const mediaReports = [
 ]
 
 // ========== 其他佐证（来自佐证材料 全篇 + 16个PDF文件） ==========
+// ========== 理论成果数据 ==========
+// 以下各数组保留结构，具体内容由用户替换
+export const theoryProjects = [
+  { id: 'tp1', title: '（待补充项目名称一）', source: '（待补充）', year: '（待补充）', status: '（待补充）', detail: '（待补充项目简介）' },
+  { id: 'tp2', title: '（待补充项目名称二）', source: '（待补充）', year: '（待补充）', status: '（待补充）', detail: '（待补充项目简介）' }
+]
+
+export const theoryPapers = [
+  { id: 'pa1', title: '（待补充论文题目一）', authors: '（待补充）', journal: '（待补充）', year: '（待补充）', detail: '（待补充论文摘要）' },
+  { id: 'pa2', title: '（待补充论文题目二）', authors: '（待补充）', journal: '（待补充）', year: '（待补充）', detail: '（待补充论文摘要）' },
+  { id: 'pa3', title: '（待补充论文题目三）', authors: '（待补充）', journal: '（待补充）', year: '（待补充）', detail: '（待补充论文摘要）' }
+]
+
+export const theoryTextbooks = [
+  { id: 'tb1', title: '（待补充教材名称一）', publisher: '（待补充）', year: '（待补充）', level: '（待补充）' },
+  { id: 'tb2', title: '（待补充教材名称二）', publisher: '（待补充）', year: '（待补充）', level: '（待补充）' },
+  { id: 'tb3', title: '（待补充教材名称三）', publisher: '（待补充）', year: '（待补充）', level: '（待补充）' }
+]
+
+export const theoryCategories = [
+  { key: 'projects', label: '省级教改课题', items: theoryProjects },
+  { key: 'papers',   label: '学术论文',     items: theoryPapers },
+  { key: 'textbooks',label: '出版教材',     items: theoryTextbooks }
+]
+
 export const evidencePDFs = [
   { key: 'case1', label: '案例1：行走课堂·数智铸魂：旅游类专业"红色山东"思政育人创新实践' },
   { key: 'case2', label: '案例2：校企协三方联动：创新"师带徒"协同育人机制实践' },
@@ -178,10 +203,9 @@ export const evidencePDFs = [
   { key: 'case9', label: '案例9：留学山旅·中蒙共育："一带一路"背景下旅游类国际化人才培养创新实践' },
   { key: 'cooperation', label: '创新校企合作机制' },
   { key: 'base', label: '建设产教融合实训基地' },
-  { key: 'museum', label: '新增博物馆研学导师' },
-  { key: 'textbook', label: '新增教材' },
-  { key: 'project', label: '新增横向课题' },
-  { key: 'mentor', label: '特聘产业导师' },
-  { key: 'award2025', label: '新增2025年度优秀理事单位匾额' }
+  { key: 'teacher', label: '师资队伍建设' },
+  { key: 'textbook', label: '出版教材著作和论文' },
+  { key: 'project', label: '社会服务' },
+  { key: 'award2025', label: '2025年度优秀理事单位匾额' }
 ]
 

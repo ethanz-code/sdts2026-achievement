@@ -11,7 +11,7 @@ const routes = [
     path: '/recommend',
     name: 'recommend',
     component: () => import('@/views/RecommendView.vue'),
-    meta: { title: '推荐书' }
+    meta: { title: '申报书' }
   },
   {
     path: '/summary',

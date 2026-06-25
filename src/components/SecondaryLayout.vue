@@ -20,7 +20,7 @@ defineEmits(['update:modelValue'])
 <style lang="scss" scoped>
 .pg{display:grid;grid-template-columns:240px 1fr;gap:48px;padding:32px 0 48px;align-items:start}
 .pg-mn{min-width:0}
-.crumb{font-size:13px;color:var(--txt3);margin-bottom:16px;font-family:"Noto Sans SC",sans-serif;display:flex;align-items:center;gap:6px;background:var(--red-ll);padding:10px 16px;border-radius:4px}
+.crumb{font-size:13px;color:var(--txt3);margin-bottom:16px;font-family:var(--font-sans);display:flex;align-items:center;gap:6px;background:var(--cream);padding:10px 16px;border-radius:4px;border:1px solid var(--gold-border)}
 .crumb-icon{color:var(--red);font-size:16px;flex-shrink:0}
 .crumb a{color:var(--txt3);&:hover{color:var(--red)}}
 .crumb .sep{margin:0 4px;color:#ccc}
