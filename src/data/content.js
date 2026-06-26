@@ -59,13 +59,13 @@ export const overview = {
 
 // ========== 左侧成果导览（来自申报书） ==========
 export const leftSidebarItems = [
-  { key: 'theory', label: '理论成果' },
-  { key: 'baize', label: '旅游职业教育大模型-白泽' },
-  { key: 'redBrand', label: '红色山东 行走课堂品牌活动' },
-  { key: 'problem', label: '成果解决的教学问题与方法' },
-  { key: 'innovation', label: '成果创新点' },
-  { key: 'people', label: '成果完成人' },
-  { key: 'organization', label: '成果完成单位' }
+  { key: 'theory', label: '理论成果', icon: '/images/sidebar-icons/理论成果.png' },
+  { key: 'baize', label: '旅游职业教育大模型-白泽', icon: '/images/sidebar-icons/general-icon-1.png' },
+  { key: 'redBrand', label: '红色山东 行走课堂品牌活动', icon: '/images/sidebar-icons/general-icon-2.png' },
+  { key: 'problem', label: '成果解决的教学问题与方法', icon: '/images/sidebar-icons/解决方法.png' },
+  { key: 'innovation', label: '成果创新点', icon: '/images/sidebar-icons/创新点.png' },
+  { key: 'people', label: '成果完成人', icon: '/images/sidebar-icons/完成人.png' },
+  { key: 'organization', label: '成果完成单位', icon: '/images/sidebar-icons/完成单位.png' }
 ]
 
 

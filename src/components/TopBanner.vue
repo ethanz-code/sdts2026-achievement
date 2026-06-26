@@ -3,8 +3,7 @@
     <div class="bnr">
       <div class="bnr-bg-1"></div>
       <div class="bnr-bg-3"></div>
-      <div class="bnr-mist"></div>
-      <div class="bnr-red-overlay"></div>
+      <div class="bnr-overlay"></div>
       <div class="bnr-bottom-glow"></div>
       <div class="bnr-flare"></div>
       <div class="container bnr-inner">
@@ -12,15 +11,14 @@
           <div class="bnr-brand">
             <img
               class="bnr-logo"
-              src="/images/school-emblem.webp"
+              src="/images/school-logo.png"
               alt="山东旅游职业学院"
             />
-            <span class="bnr-school-name">山东旅游职业学院</span>
           </div>
           <div class="bnr-txt">
             <h1>国家教学成果奖申报</h1>
             <h2>
-              红智双融·场景贯通·知行转化：旅游类专业大思政实践育人模式创新与实践
+              红智双融·场景贯通·知行转化：<br />旅游类专业大思政实践育人模式创新与实践
             </h2>
           </div>
         </div>
@@ -118,7 +116,7 @@ const isSubActive = (p, q) => {
 <style lang="scss" scoped>
 .bnr {
   position: relative;
-  height: 180px;
+  height: 220px;
   overflow: hidden;
 }
 .bnr-bg-1 {
@@ -135,17 +133,19 @@ const isSubActive = (p, q) => {
   -webkit-mask-image: linear-gradient(to left, #000 40%, transparent 100%);
   mask-image: linear-gradient(to left, #000 40%, transparent 100%);
 }
-/* 红色色相叠加 - 代替纯黑蒙版 */
-.bnr-mist {
-  position: absolute; inset: 0; z-index: 2;
-  background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,.18) 0%, rgba(255,255,255,.06) 40%, transparent 70%);
-}
-/* 暗角 + 红色色相 */
-.bnr-red-overlay {
+/* 暗红色相叠加（左侧留出明亮区给 logo，右侧覆盖文字区） */
+/* 暗红色相叠加（左侧留出明亮区给 logo，右侧覆盖文字区） */
+.bnr-overlay {
   position: absolute; inset: 0; z-index: 2;
   background:
-    linear-gradient(90deg, rgba(80,10,10,.7) 0%, rgba(40,5,5,.45) 50%, rgba(80,10,10,.7) 100%),
-    radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,.35) 100%);
+    linear-gradient(90deg,
+      rgba(80,10,10,0) 0%,
+      rgba(80,10,10,.05) 18%,
+      rgba(80,10,10,.35) 38%,
+      rgba(80,10,10,.55) 60%,
+      rgba(80,10,10,.55) 100%
+    ),
+    radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,.28) 100%);
 }
 /* 金色光束 */
 .bnr-flare {
@@ -166,52 +166,41 @@ const isSubActive = (p, q) => {
   height: 60%;
   z-index: 2;
   pointer-events: none;
-  background: linear-gradient(180deg, transparent 0%, rgba(180,20,20,.15) 50%, rgba(120,10,10,.5) 100%);
+  background: linear-gradient(180deg, transparent 0%, rgba(180,20,20,.08) 50%, rgba(120,10,10,.25) 100%);
 }
 .bnr-inner {
   position: relative; z-index: 4; height: 100%;
 }
 .bnr-body {
-  position: absolute;
+  position: relative;
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 40px;
-  white-space: nowrap;
-  left: 40px;
-  top: 50%;
-  transform: translateY(-50%);
+  height: 100%;
 }
 .bnr-brand {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
+  position: absolute;
+  left: 32px;
+  top: 30%;
+  transform: translateY(-50%);
   flex-shrink: 0;
 }
 .bnr-logo {
-  width: 85px; height: 85px; object-fit: contain; flex-shrink: 0;
-  filter: drop-shadow(0 3px 10px rgba(0,0,0,.35));
-}
-.bnr-school-name {
-  font-size: 15px;
-  font-weight: 600;
-  color: #f0e6c8;
-  font-family: var(--font-sans);
-  letter-spacing: 6px;
-  text-shadow: 0 1px 4px rgba(0,0,0,.5);
-  white-space: nowrap;
+  width: 180px; height: auto; object-fit: contain;
 }
 .bnr-txt {
-  color: #fff;
+  text-align: center;
+  max-width: 80%;
   h1 {
-    font-size: 42px; font-weight: 700; line-height: 1.3; letter-spacing: 6px;
+    font-size: 28px; font-weight: 700; line-height: 1.4; letter-spacing: 6px;
     text-shadow: 0 2px 8px rgba(0,0,0,.4);
     font-family: var(--font-serif); color: #fff;
   }
   h2 {
-    font-size: 28px; color: #f7e5b0; font-weight: 700; line-height: 1.4;
-    letter-spacing: 4px; text-shadow: 0 2px 6px rgba(0,0,0,.6);
-    font-family: var(--font-serif); margin-top: 8px;
+    font-size: 42px; color: #f7e5b0; font-weight: 400; line-height: 1.5;
+    letter-spacing: 3px; text-shadow: 0 2px 6px rgba(0,0,0,.6);
+    font-family: "Ma Shan Zheng", "STXingkai", "KaiTi", "楷体", cursive;
+    margin-top: 4px;
   }
 }
 .bnr-gold-line{
@@ -357,23 +346,16 @@ const isSubActive = (p, q) => {
 
 @media (max-width: 1024px) {
   .nav { z-index: 300; }
-  .bnr-body {
-    gap: 24px;
-    left: 24px;
-  }
   .bnr-brand {
-    gap: 4px;
+    left: 20px;
   }
-  .bnr-school-name {
-    font-size: 13px;
-    letter-spacing: 4px;
+  .bnr-logo {
+    width: 160px;
   }
-  .bnr-txt h1 {
-    font-size: 26px;
-  }
-  .bnr-txt h2 {
-    font-size: 20px;
-    letter-spacing: 2px;
+  .bnr-txt {
+    max-width: 85%;
+    h1 { font-size: 18px; }
+    h2 { font-size: 30px; }
   }
 
   .nav-btn {
@@ -461,66 +443,43 @@ const isSubActive = (p, q) => {
 @media (max-width: 767px) {
   .bnr {
     height: auto !important;
-    padding: 24px 14px;
+    padding: 28px 14px;
     text-align: center;
   }
+  .bnr-overlay {
+    background:
+      linear-gradient(90deg, rgba(80,10,10,.55) 0%, rgba(40,5,5,.35) 50%, rgba(80,10,10,.55) 100%),
+      radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,.28) 100%);
+  }
   .bnr-body {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .bnr-brand {
     position: relative;
     left: auto;
     top: auto;
     transform: none;
-    flex-direction: column;
-    gap: 16px;
-    white-space: normal;
-  }
-  .bnr-brand {
-    gap: 4px;
-  }
-  .bnr-school-name {
-    font-size: 14px;
-    letter-spacing: 4px;
   }
   .bnr-logo {
-    width: 56px;
-    height: 56px;
+    width: 140px;
   }
   .bnr-txt {
-    text-align: center;
-  }
-  .bnr-txt h1 {
-    font-size: 20px;
-    letter-spacing: 2px;
-  }
-  .bnr-txt h2 {
-    font-size: 16px;
-    letter-spacing: 2px;
+    max-width: 100%;
+    h1 { font-size: 16px; }
+    h2 { font-size: 26px; }
   }
 }
 @media (max-width: 480px) {
   .bnr {
-    padding: 18px 10px;
-  }
-  .bnr-body {
-    gap: 12px;
-  }
-  .bnr-brand {
-    gap: 3px;
-  }
-  .bnr-school-name {
-    font-size: 12px;
-    letter-spacing: 3px;
+    padding: 20px 10px;
   }
   .bnr-logo {
-    width: 44px;
-    height: 44px;
+    width: 120px;
   }
-  .bnr-txt h1 {
-    font-size: 16px;
-    letter-spacing: 1px;
-  }
-  .bnr-txt h2 {
-    font-size: 14px;
-    letter-spacing: 1px;
+  .bnr-txt {
+    h1 { font-size: 14px; }
+    h2 { font-size: 22px; }
   }
 }
 </style>

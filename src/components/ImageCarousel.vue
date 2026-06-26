@@ -7,8 +7,8 @@
         class="ic-slide"
         @click="open(img)"
       >
-        <div class="ic-box">
-          <img v-if="img.src" v-lazy="img.src" class="ic-img" :alt="img.label" />
+        <div class="ic-box" :class="{ rotated: img.rotate }">
+          <img v-if="img.src" v-lazy="img.src" class="ic-img" :class="{ rotated: img.rotate }" :style="img.rotate ? { transform: `rotate(${img.rotate})` } : undefined" :alt="img.label" />
           <div class="ic-ph">
             <span class="ic-ph-label">{{ img.label || `[Image ${img.id}]` }}</span>
           </div>
@@ -20,7 +20,7 @@
       <div v-if="active !== null" class="lightbox" @click.self="close">
         <button class="lightbox-close" @click="close" aria-label="关闭">&times;</button>
         <div class="lightbox-inner">
-          <img v-if="active.src" :src="active.src" class="lightbox-img" :alt="active.label" />
+          <img v-if="active.src" :src="active.src" class="lightbox-img" :class="{ rotated: active.rotate }" :style="active.rotate ? { transform: `rotate(${active.rotate})` } : undefined" :alt="active.label" />
           <div v-else class="lightbox-placeholder">
             <span class="lightbox-label">{{ active.label || `[Image ${active.id}]` }}</span>
           </div>
@@ -77,7 +77,7 @@ function close() {
   cursor: pointer;
 
   &.horizontal {
-    min-height: 240px;
+    min-height: 220px;
     .ic-slide { width: 320px; height: 220px; }
     @keyframes scrollLoopH { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
     .ic-track { animation-name: scrollLoopH; }
@@ -125,6 +125,10 @@ function close() {
   height: 100%;
   object-fit: cover;
   display: block;
+
+  &.rotated {
+    object-fit: cover;
+  }
 
   &.lazy-pending {
     opacity: 0;
@@ -192,6 +196,12 @@ function close() {
   max-height: 82vh;
   object-fit: contain;
   border-radius: 4px;
+
+  &.rotated {
+    max-width: 82vh;
+    max-height: 88vw;
+    object-fit: contain;
+  }
 }
 .lightbox-placeholder {
   width: 80vw;
@@ -214,13 +224,13 @@ function close() {
 @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 
 @media(max-width:767px){
-  .ic-outer.horizontal { min-height: 190px; .ic-slide { width: 240px; height: 170px; } }
+  .ic-outer.horizontal { min-height: 170px; .ic-slide { width: 240px; height: 170px; } }
   .ic-outer.vertical .ic-slide { height: 160px; }
   .ic-outer.vertical { height: 420px; }
   .lightbox-placeholder { width: 95vw; height: 50vh; }
 }
 @media(max-width:480px){
-  .ic-outer.horizontal { min-height: 150px; .ic-slide { width: 180px; height: 130px; } }
+  .ic-outer.horizontal { min-height: 130px; .ic-slide { width: 180px; height: 130px; } }
   .ic-outer.vertical .ic-slide { height: 130px; }
   .ic-outer.vertical { height: 360px; }
 }

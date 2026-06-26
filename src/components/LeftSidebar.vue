@@ -10,6 +10,13 @@
         @mouseenter="emit('hover-item', item)"
         @mouseleave="emit('leave-item')"
       >
+        <img
+          v-if="item.icon"
+          class="i"
+          :src="item.icon"
+          :alt="item.label"
+        />
+        <span v-else class="dot"></span>
         <span class="n" v-if="showNum">{{ String(i + 1).padStart(2, '0') }}</span>
         <span class="l">{{ item.label }}</span>
       </li>
@@ -69,49 +76,60 @@ const onClick = (item) => {
   font-family:var(--font-sans);font-weight:500;
   transition:all .3s cubic-bezier(.4,0,.2,1);position:relative;
 }
-.sb-ls li::before{
-  content:'';width:5px;height:5px;border-radius:50%;
-  background:#d5c5b8;flex-shrink:0;
-  transition:all .35s cubic-bezier(.4,0,.2,1)
-}
 .sb-ls li::after{
   content:'';position:absolute;bottom:0;left:18px;right:18px;
   height:1px;background:linear-gradient(90deg,#f0e8e0 0%,transparent 100%)
 }
 .sb-ls li:last-child::after{display:none}
+.sb-ls li .dot{
+  width:5px;height:5px;border-radius:50%;
+  background:#d5c5b8;flex-shrink:0;
+  transition:all .35s cubic-bezier(.4,0,.2,1)
+}
+.sb-ls li .i{
+  width:22px;height:22px;flex-shrink:0;object-fit:contain;
+  transition:all .35s cubic-bezier(.4,0,.2,1)
+}
 
 .sb-ls li:hover{
   color:var(--red);
   background:linear-gradient(90deg,#fdf8f0 0%,transparent 60%);
   padding-left:24px
 }
-.sb-ls li:hover::before{
+.sb-ls li:hover .dot{
   background:var(--gold);
   transform:scale(1.4);
   box-shadow:0 0 0 3px rgba(200,164,90,.15)
+}
+.sb-ls li:hover .i{
+  transform:scale(1.15)
 }
 .sb-ls li.on{
   color:var(--red-d);font-weight:700;
   background:linear-gradient(90deg,#fcf5e0 0%,transparent 70%);
 }
-.sb-ls li.on::before{
+.sb-ls li.on .dot{
   background:var(--red);
   transform:scale(1.2);
   box-shadow:none
 }
+.sb-ls li.on .i{
+  transform:scale(1.1)
+}
 .sb-ls .n{font-family:var(--font-serif);font-size:11px;color:var(--txt3);min-width:20px;flex-shrink:0}
 .sb-ls li.on .n{color:var(--red)}
-.sb-ls .l{line-height:1.5;flex:1}
+.sb-ls .l{line-height:1.5;flex:1;white-space:nowrap}
 
 @media(max-width:1024px){.sb{width:240px}}
 @media(max-width:767px){
   .sb{width:100%}
   .sb-ls{
-    display:grid;grid-template-columns:1fr 1fr;gap:2px 8px;padding:6px;
+    display:grid;grid-template-columns:1fr;gap:3px;padding:6px;
   }
   .sb-ls li{padding:10px 12px;font-size:13px;border-radius:4px;gap:6px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
   .sb-ls li::after{display:none}
-  .sb-ls li::before{width:4px;height:4px}
+  .sb-ls li .dot{width:4px;height:4px}
+  .sb-ls li .i{width:18px;height:18px}
   .sb-ls li.on{background:var(--gold-ll)}
   @for $i from 1 through 7{.sb-ls li:nth-child(#{$i}){animation-delay:0s}}
 }

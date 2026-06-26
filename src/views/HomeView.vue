@@ -84,11 +84,11 @@
         <div class="award-cols">
           <div class="award-col">
             <h3 class="award-sub">成果所获奖项</h3>
-            <ImageCarousel :images="resultAwardImages" :forcePaused="lightboxOpen" @lightbox-open="lightboxOpen = true" @lightbox-close="lightboxOpen = false" />
+            <ImageCarousel :images="resultAwardImages" :speed="0.2" :forcePaused="lightboxOpen" @lightbox-open="lightboxOpen = true" @lightbox-close="lightboxOpen = false" />
           </div>
           <div class="award-col">
             <h3 class="award-sub">学生获奖</h3>
-            <ImageCarousel :images="studentAwardImages" :forcePaused="lightboxOpen" @lightbox-open="lightboxOpen = true" @lightbox-close="lightboxOpen = false" />
+            <ImageCarousel :images="studentAwardImages" :speed="0.2" :forcePaused="lightboxOpen" @lightbox-open="lightboxOpen = true" @lightbox-close="lightboxOpen = false" />
           </div>
         </div>
       </section>
@@ -194,11 +194,26 @@ const resultAwardImages = resultAwardFiles.map((f, i) => ({
 const studentAwardImages = studentAwardFiles.map((f, i) => ({
   id: i + 1,
   label: `学生获奖 ${i + 1}`,
-  src: `/images/awards-student/${f}`
+  src: `/images/awards-student/${f}`,
+  rotate: i === 16 ? '-90deg' : undefined
 }))
 
-/* 滚动触发动画 */
+/* 滚动触发动画 + sidebar高度同步 */
 const secs = ref([])
+let sbObserver = null
+
+function syncColMidHeight() {
+  const sb = document.querySelector('.sb')
+  const mid = document.querySelector('.col-mid')
+  if (sb && mid) {
+    if (window.innerWidth > 767) {
+      mid.style.height = sb.offsetHeight + 'px'
+    } else {
+      mid.style.height = ''
+    }
+  }
+}
+
 onMounted(() => {
   const els = document.querySelectorAll('.rv')
   if (!els.length) return
@@ -207,6 +222,22 @@ onMounted(() => {
   }, { threshold: .15 })
   els.forEach(el => obs.observe(el))
   secs.value = [obs]
+
+  nextTick(() => {
+    syncColMidHeight()
+    setTimeout(syncColMidHeight, 200)
+    const sb = document.querySelector('.sb')
+    if (sb && 'ResizeObserver' in window) {
+      sbObserver = new ResizeObserver(() => syncColMidHeight())
+      sbObserver.observe(sb)
+    }
+  })
+  window.addEventListener('resize', syncColMidHeight)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', syncColMidHeight)
+  if (sbObserver) sbObserver.disconnect()
 })
 </script>
 
@@ -217,17 +248,18 @@ onMounted(() => {
 .rv{opacity:0;transform:translateY(24px);transition:all .6s ease}
 .rv-in{opacity:1;transform:translateY(0)}
 
-.cols{display:grid;grid-template-columns:240px 42fr 58fr;gap:32px;margin:36px 0 40px;align-items:start}
-.col-mid{min-width:0;display:flex;flex-direction:column;gap:12px}
-.col-rt{min-width:0}
+.cols{display:grid;grid-template-columns:240px 50fr 50fr;gap:32px;margin:36px 0 40px;align-items:start}
+.col-mid{min-width:0;overflow:hidden;max-height:600px}
+.col-rt{min-width:0;align-self:stretch;display:flex;flex-direction:column}
 
 /* 视频区 */
-.vid-wrap{background:#fff;border-radius:6px;padding:10px;box-shadow:var(--shadow-sm);border:1px solid #ede5dd}
+.vid-wrap{background:#fff;border-radius:6px;padding:10px;box-shadow:var(--shadow-sm);border:1px solid #ede5dd;height:100%;display:flex;flex-direction:column}
 .vid-sub{font-size:15px;font-weight:700;color:var(--red-d);margin:0;font-family:var(--font-serif);letter-spacing:2px;padding:10px 16px;background:linear-gradient(135deg,var(--red-ll) 0%,#fff 100%);border-radius:4px 4px 0 0;position:relative;border-bottom:2px solid var(--gold)}
-.vid-wrap :deep(.vdo){border-radius:0 0 4px 4px;overflow:hidden}
+.vid-wrap :deep(.vdo){border-radius:0 0 4px 4px;overflow:hidden;flex:1;display:flex}
+.vid-wrap :deep(.vdo-fr){flex:1;height:100%}
 
 /* 成果简介卡片 */
-.ov-wrap{background:#fff;border-radius:6px;box-shadow:var(--shadow-sm);overflow:hidden;border:1px solid #ede5dd;transition:box-shadow .4s}
+.ov-wrap{background:#fff;border-radius:6px;box-shadow:var(--shadow-sm);overflow:hidden;border:1px solid #ede5dd;transition:box-shadow .4s;height:100%;display:flex;flex-direction:column}
 .ov-wrap:hover{box-shadow:var(--shadow-md)}
 .ov-tit{
   font-size:18px;font-weight:700;color:var(--red-d);padding:16px 24px;
@@ -237,7 +269,7 @@ onMounted(() => {
   position:relative
 }
 .ov-tit::before{content:'';display:inline-block;width:4px;height:18px;background:var(--red);border-radius:2px;margin-right:10px;vertical-align:middle}
-.ov-bd{padding:24px 24px;background:linear-gradient(180deg,#fcfaf6 0%,#fff 60%)}
+.ov-bd{padding:24px 24px;background:linear-gradient(180deg,#fcfaf6 0%,#fff 60%);flex:1}
 .ov-p{text-indent:2em;font-size:16px;line-height:2;color:var(--txt);font-family:var(--font-sans);margin-bottom:16px}
 .ov-more{display:inline-block;margin-top:4px;font-size:14px;color:var(--red);font-weight:600;text-decoration:none;font-family:var(--font-sans);position:relative;transition:color .3s}
 .ov-more::after{content:'→';display:inline-block;margin-left:4px;transition:transform .3s cubic-bezier(.4,0,.2,1)}
@@ -273,7 +305,7 @@ onMounted(() => {
 .pop-fade-enter-from,.pop-fade-leave-to{opacity:0;transform:translateX(-8px)}
 
 /* 理论成果详情卡片 */
-.theory-detail{background:#fff;border-radius:6px;box-shadow:var(--shadow-sm);overflow:hidden;border:1px solid #ede5dd}
+.theory-detail{background:#fff;border-radius:6px;box-shadow:var(--shadow-sm);overflow:hidden;border:1px solid #ede5dd;height:100%;display:flex;flex-direction:column}
 .td-hd{
   display:flex;align-items:center;gap:12px;
   padding:14px 24px;background:linear-gradient(135deg,#fdf8f0 0%,#fff 100%);
@@ -281,7 +313,7 @@ onMounted(() => {
 }
 .td-tit{font-size:18px;font-weight:700;color:var(--red-d);font-family:var(--font-serif);letter-spacing:2px;margin:0;flex:1}
 .td-tag{font-size:12px;padding:3px 12px;border-radius:10px;background:var(--red-ll);color:var(--red-d);font-weight:600;white-space:nowrap;flex-shrink:0}
-.td-bd{padding:20px 24px}
+.td-bd{padding:20px 24px;flex:1}
 .td-item-tit{font-size:17px;font-weight:700;color:#333;margin:0 0 16px;line-height:1.6;font-family:var(--font-serif)}
 .td-meta{
   display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px;
@@ -312,6 +344,7 @@ onMounted(() => {
 }
 @media(max-width:767px){
   .cols{grid-template-columns:1fr;gap:24px;margin:24px 0 28px}
+  .col-mid{height:auto;overflow:visible}
   .hm{padding:0 0 32px}
   .ov-tit{padding:12px 16px;font-size:16px}
   .ov-bd{padding:16px}
