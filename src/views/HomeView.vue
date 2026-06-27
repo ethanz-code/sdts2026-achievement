@@ -339,8 +339,7 @@ onUnmounted(() => {
 
 @media(max-width:1024px){
   .cols{grid-template-columns:240px 1fr;gap:24px}
-  .col-mid{display:none}
-  .col-rt{grid-column:auto}
+  .col-rt{grid-column:1/-1}
 }
 @media(max-width:767px){
   .cols{grid-template-columns:1fr;gap:24px;margin:24px 0 28px}

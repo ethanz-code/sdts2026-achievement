@@ -11,7 +11,7 @@
           <div class="bnr-brand">
             <img
               class="bnr-logo"
-              src="/images/school-logo.png"
+              src="/images/school-logo.webp"
               alt="山东旅游职业学院"
             />
           </div>
@@ -186,18 +186,18 @@ const isSubActive = (p, q) => {
   flex-shrink: 0;
 }
 .bnr-logo {
-  width: 180px; height: auto; object-fit: contain;
+  width: clamp(90px, 12vw, 180px); height: auto; object-fit: contain;
 }
 .bnr-txt {
   text-align: center;
   max-width: 80%;
   h1 {
-    font-size: 28px; font-weight: 700; line-height: 1.4; letter-spacing: 6px;
+    font-size: clamp(13px, 2vw, 28px); font-weight: 700; line-height: 1.4; letter-spacing: 6px;
     text-shadow: 0 2px 8px rgba(0,0,0,.4);
     font-family: var(--font-serif); color: #fff;
   }
   h2 {
-    font-size: 42px; color: #f7e5b0; font-weight: 400; line-height: 1.5;
+    font-size: clamp(18px, 3vw, 42px); color: #f7e5b0; font-weight: 400; line-height: 1.5;
     letter-spacing: 3px; text-shadow: 0 2px 6px rgba(0,0,0,.6);
     font-family: "Ma Shan Zheng", "STXingkai", "KaiTi", "楷体", cursive;
     margin-top: 4px;
@@ -349,13 +349,8 @@ const isSubActive = (p, q) => {
   .bnr-brand {
     left: 20px;
   }
-  .bnr-logo {
-    width: 160px;
-  }
   .bnr-txt {
     max-width: 85%;
-    h1 { font-size: 18px; }
-    h2 { font-size: 30px; }
   }
 
   .nav-btn {
@@ -461,25 +456,16 @@ const isSubActive = (p, q) => {
     top: auto;
     transform: none;
   }
-  .bnr-logo {
-    width: 140px;
-  }
   .bnr-txt {
     max-width: 100%;
-    h1 { font-size: 16px; }
-    h2 { font-size: 26px; }
   }
 }
 @media (max-width: 480px) {
   .bnr {
     padding: 20px 10px;
   }
-  .bnr-logo {
-    width: 120px;
-  }
   .bnr-txt {
-    h1 { font-size: 14px; }
-    h2 { font-size: 22px; }
+    h1 { letter-spacing: 4px; }
   }
 }
 </style>
