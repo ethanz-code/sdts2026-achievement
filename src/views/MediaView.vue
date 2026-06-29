@@ -1,48 +1,71 @@
 <template>
-  <SecondaryLayout st="媒体报道" :si="[]" pt="媒体报道" :cr="'媒体报道'">
+  <SecondaryLayout st="媒体报道" :si="si" v-model="key" pt="媒体报道" :cr="curLabel || '媒体报道'">
     <div class="media-wrap">
-      <template v-for="(group, cat) in groupedReports" :key="cat">
-        <h2 class="sec-h">{{ cat }}</h2>
-        <table class="media-tbl">
-          <thead>
-            <tr>
-              <th class="w-src">来源</th>
-              <th class="w-title">标题</th>
-              <th class="w-date">日期</th>
-              <th class="w-note">备注</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(m, i) in group" :key="i">
-              <td class="td-src">
-                <span class="src-lvl">{{ m.level }}</span>
-                {{ m.source }}
-              </td>
-              <td class="td-title">
-                <a :href="m.url" target="_blank" rel="noopener">{{ m.title }}</a>
-              </td>
-              <td class="td-date">{{ m.date }}</td>
-              <td class="td-note">{{ m.note }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </template>
+      <h2 class="sec-h">{{ currentCategory }}</h2>
+      <table class="media-tbl">
+        <thead>
+          <tr>
+            <th class="w-src">来源</th>
+            <th class="w-title">标题</th>
+            <th class="w-date">日期</th>
+            <th class="w-note">备注</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(m, i) in currentReports" :key="i">
+            <td class="td-src">
+              <span class="src-lvl">{{ m.level }}</span>
+              {{ m.source }}
+            </td>
+            <td class="td-title">
+              <a :href="m.url" target="_blank" rel="noopener">{{ m.title }}</a>
+            </td>
+            <td class="td-date">{{ m.date }}</td>
+            <td class="td-note">{{ m.note }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </SecondaryLayout>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import SecondaryLayout from '@/components/SecondaryLayout.vue'
 import { mediaReports as list } from '@/data/content.js'
 
-const groupedReports = computed(() => {
-  const groups = {}
-  for (const m of list) {
-    if (!groups[m.category]) groups[m.category] = []
-    groups[m.category].push(m)
-  }
-  return groups
+const route = useRoute()
+
+const sectionMap = {
+  redWalk: '红色行走课堂',
+  baize: '白泽大模型',
+  skillComp: '技能大赛',
+  unwto: 'UNWTO认证与专业群',
+  partyBuild: '党建与产教融合'
+}
+
+const defaultSection = 'redWalk'
+
+const key = ref(route.query.section || defaultSection)
+
+const si = Object.entries(sectionMap).map(([k, label]) => ({
+  key: k,
+  label,
+  path: `/media?section=${k}`
+}))
+
+const curLabel = computed(() => si.find(s => s.key === key.value)?.label || '')
+
+const currentCategory = computed(() => sectionMap[key.value] || sectionMap[defaultSection])
+
+const currentReports = computed(() => {
+  const cat = currentCategory.value
+  return list.filter(m => m.category === cat)
+})
+
+watch(() => route.query.section, (v) => {
+  key.value = v || defaultSection
 })
 </script>
 

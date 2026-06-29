@@ -197,7 +197,7 @@ const isSubActive = (p, q) => {
     font-family: var(--font-serif); color: #fff;
   }
   h2 {
-    font-size: clamp(18px, 3vw, 42px); color: #f7e5b0; font-weight: 400; line-height: 1.5;
+    font-size: clamp(18px, 3vw, 42px); color: #f7e5b0; font-weight: 400; line-height: 1.2;
     letter-spacing: 3px; text-shadow: 0 2px 6px rgba(0,0,0,.6);
     font-family: "Ma Shan Zheng", "STXingkai", "KaiTi", "楷体", cursive;
     margin-top: 4px;

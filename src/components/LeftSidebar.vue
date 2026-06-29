@@ -33,7 +33,7 @@ const props = defineProps({
   modelValue:{ type: String, default: '' },
   showNum:   { type: Boolean, default: false }
 })
-const emit = defineEmits(['update:modelValue', 'hover-item', 'leave-item'])
+const emit = defineEmits(['update:modelValue', 'hover-item', 'leave-item', 'click-item'])
 
 const route = useRoute()
 const router = useRouter()
@@ -52,8 +52,10 @@ const isActive = (item) => {
 const onClick = (item) => {
   if (item.path) {
     router.push(item.path)
+    emit('update:modelValue', item.key)
+  } else {
+    emit('click-item', item)
   }
-  emit('update:modelValue', item.key)
 }
 </script>
 

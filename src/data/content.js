@@ -25,18 +25,21 @@ export const topNavItems = [
     { key: 'companyApp', label: '部分合作企业应用推广情况', path: '/promotion?tab=companyApp' },
     { key: 'otherApp', label: '其他应用单位', path: '/promotion?tab=otherApp' }
   ]},
-  { key: 'media', label: '媒体报道', path: '/media' },
-  { key: 'international', label: '国际认可', path: '/international' },
+  { key: 'media', label: '媒体报道', path: '/media', children: [
+    { key: 'redWalk', label: '红色行走课堂', path: '/media?section=redWalk' },
+    { key: 'baize', label: '白泽大模型', path: '/media?section=baize' },
+    { key: 'skillComp', label: '技能大赛', path: '/media?section=skillComp' },
+    { key: 'unwto', label: 'UNWTO认证与专业群', path: '/media?section=unwto' },
+    { key: 'partyBuild', label: '党建与产教融合', path: '/media?section=partyBuild' }
+  ]},
+  { key: 'international', label: '国际认可', path: '/international', children: [
+    { key: 'intlStandard', label: '一、牵头研制国际标准', path: '/international?section=standard' },
+    { key: 'intlExchange', label: '二、拓展国际交流与合作', path: '/international?section=exchange' },
+    { key: 'intlBase', label: '三、国际化人才培养基地', path: '/international?section=base' },
+    { key: 'beltRoad', label: '四、服务一带一路', path: '/international?section=beltRoad' }
+  ]},
   { key: 'evidence', label: '其他佐证', path: '/evidence', children: [
-    { key: 'case1', label: '案例1：行走课堂·数智铸魂', path: '/evidence?filter=case1' },
-    { key: 'case2', label: '案例2：校企协三方联动', path: '/evidence?filter=case2' },
-    { key: 'case3', label: '案例3：标准引领·产教适配', path: '/evidence?filter=case3' },
-    { key: 'case4', label: '案例4：双元三融·数智赋能', path: '/evidence?filter=case4' },
-    { key: 'case5', label: '案例5：活页模块·数智融合', path: '/evidence?filter=case5' },
-    { key: 'case6', label: '案例6：行业深耕·教学反哺', path: '/evidence?filter=case6' },
-    { key: 'case7', label: '案例7：基地共建·实战育人', path: '/evidence?filter=case7' },
-    { key: 'case8', label: '案例8：白泽赋能·生态重构', path: '/evidence?filter=case8' },
-    { key: 'case9', label: '案例9：留学山旅·中蒙共育', path: '/evidence?filter=case9' },
+    { key: 'caseLibrary', label: '案例库（案例1-9）', path: '/evidence?filter=caseLibrary' },
     { key: 'cooperation', label: '创新校企合作机制', path: '/evidence?filter=cooperation' },
     { key: 'base', label: '建设产教融合实训基地', path: '/evidence?filter=base' },
     { key: 'teacher', label: '师资队伍建设', path: '/evidence?filter=teacher' },
@@ -166,41 +169,14 @@ export const mediaReports = [
 ]
 
 // ========== 其他佐证（来自佐证材料 全篇 + 16个PDF文件） ==========
-// ========== 理论成果数据 ==========
-// 以下各数组保留结构，具体内容由用户替换
-export const theoryProjects = [
-  { id: 'tp1', title: '（待补充项目名称一）', source: '（待补充）', year: '（待补充）', status: '（待补充）', detail: '（待补充项目简介）' },
-  { id: 'tp2', title: '（待补充项目名称二）', source: '（待补充）', year: '（待补充）', status: '（待补充）', detail: '（待补充项目简介）' }
-]
-
-export const theoryPapers = [
-  { id: 'pa1', title: '（待补充论文题目一）', authors: '（待补充）', journal: '（待补充）', year: '（待补充）', detail: '（待补充论文摘要）' },
-  { id: 'pa2', title: '（待补充论文题目二）', authors: '（待补充）', journal: '（待补充）', year: '（待补充）', detail: '（待补充论文摘要）' },
-  { id: 'pa3', title: '（待补充论文题目三）', authors: '（待补充）', journal: '（待补充）', year: '（待补充）', detail: '（待补充论文摘要）' }
-]
-
-export const theoryTextbooks = [
-  { id: 'tb1', title: '（待补充教材名称一）', publisher: '（待补充）', year: '（待补充）', level: '（待补充）' },
-  { id: 'tb2', title: '（待补充教材名称二）', publisher: '（待补充）', year: '（待补充）', level: '（待补充）' },
-  { id: 'tb3', title: '（待补充教材名称三）', publisher: '（待补充）', year: '（待补充）', level: '（待补充）' }
-]
-
 export const theoryCategories = [
-  { key: 'projects', label: '省级教改课题', items: theoryProjects },
-  { key: 'papers',   label: '学术论文',     items: theoryPapers },
-  { key: 'textbooks',label: '出版教材',     items: theoryTextbooks }
+  { key: 'projects', label: '省级教改课题', path: '/?section=projects' },
+  { key: 'papers',   label: '学术论文',     path: '/?section=papers' },
+  { key: 'textbooks',label: '出版教材',     path: '/?section=textbooks' }
 ]
 
 export const evidencePDFs = [
-  { key: 'case1', label: '案例1：行走课堂·数智铸魂：旅游类专业"红色山东"思政育人创新实践' },
-  { key: 'case2', label: '案例2：校企协三方联动：创新"师带徒"协同育人机制实践' },
-  { key: 'case3', label: '案例3：标准引领·产教适配：牵头开发省级旅游类专业教学指导方案的创新实践' },
-  { key: 'case4', label: '案例4：双元三融·数智赋能：人工智能一流核心课程建设探索与实践' },
-  { key: 'case5', label: '案例5：活页模块·数智融合：《人工智能应用基础》新形态教材开发实践' },
-  { key: 'case6', label: '案例6：行业深耕·教学反哺：双师型教师韩兆君"产教双向赋能"成长案例' },
-  { key: 'case7', label: '案例7：基地共建·实战育人："途牛—山旅"旅游直播产教融合实训基地建设案例' },
-  { key: 'case8', label: '案例8：白泽赋能·生态重构：旅游职业教育"AI+教学"数字化新生态构建实践' },
-  { key: 'case9', label: '案例9：留学山旅·中蒙共育："一带一路"背景下旅游类国际化人才培养创新实践' },
+  { key: 'caseLibrary', label: '案例库（案例1-9）' },
   { key: 'cooperation', label: '创新校企合作机制' },
   { key: 'base', label: '建设产教融合实训基地' },
   { key: 'teacher', label: '师资队伍建设' },

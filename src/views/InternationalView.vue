@@ -1,34 +1,38 @@
 <template>
-  <SecondaryLayout st="国际认可" :si="[]" pt="国际认可" :cr="'国际认可'">
-    <ContentLoader base="international">
-      <template #fallback>
-        <h2 class="sec-h">国际认证与合作</h2>
-        <div class="list">
-          <p v-for="(c,i) in list" :key="i">
-            {{ i + 1 }}. {{ c.n }}<span v-if="c.l">（{{ c.l }}，{{ c.y }}，{{ c.o }}）</span>
-          </p>
-        </div>
-      </template>
-    </ContentLoader>
+  <SecondaryLayout st="国际认可" :si="si" v-model="key" pt="国际认可" :cr="curLabel || '国际认可'">
+    <ContentLoader base="international" :sub="subFile" />
   </SecondaryLayout>
 </template>
 
 <script setup>
+import { ref, computed, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import SecondaryLayout from '@/components/SecondaryLayout.vue'
 import ContentLoader from '@/components/ContentLoader.vue'
 
-const list = [
-  {n:'旅游管理专业世界旅游组织专业认证（UNWTO TedQual）',l:'世界级',y:'2021',o:'世界旅游组织'},
-  {n:'世界数字教育大会《中国智慧教育发展报告》入选',l:'世界级',y:'2026',o:'联合国教科文组织'},
-  {n:'中外合作办学项目（瑞士方向）',l:'国际',y:'2018',o:'瑞士洛桑酒店管理学院'},
-  {n:'中外合作办学项目（韩国方向）',l:'国际',y:'2019',o:'韩国庆熙大学'},
-  {n:'中蒙旅游研究院',l:'国际',y:'2022',o:'蒙古财经大学'},
-  {n:'中印尼旅游国际化人才培训基地',l:'国际',y:'2024',o:'印度尼西亚相关院校'},
-  {n:'中马文旅人才培养基地',l:'国际',y:'2025',o:'马来西亚相关院校'}
-]
-</script>
+const route = useRoute()
 
-<style lang="scss" scoped>
-.sec-h { font-size: 20px; font-weight: 700; color: var(--red-d); margin: 0 0 16px; font-family: var(--font-serif); letter-spacing:1px; }
-.list p { font-size: 15px; line-height: 2.2; color: var(--txt); font-family: var(--font-sans); margin: 0 0 6px; }
-</style>
+const sections = [
+  { key: 'standard', label: '一、牵头研制国际标准', file: 'standard' },
+  { key: 'exchange', label: '二、拓展国际交流与合作', file: 'exchange' },
+  { key: 'base', label: '三、国际化人才培养基地', file: 'base' },
+  { key: 'beltRoad', label: '四、服务一带一路', file: 'beltRoad' }
+]
+
+const key = ref(route.query.section || 'standard')
+const subFile = ref(route.query.section || 'standard')
+
+const si = sections.map(s => ({
+  key: s.key,
+  label: s.label,
+  path: `/international?section=${s.key}`
+}))
+
+const curLabel = computed(() => si.find(s => s.key === key.value)?.label || '')
+
+watch(() => route.query.section, (v) => {
+  const section = v || 'standard'
+  key.value = section
+  subFile.value = section
+})
+</script>
